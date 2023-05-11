@@ -1,13 +1,13 @@
 "use client";
 
-import CustomButton from '@components/CustomButton'
-import CustomInput from '@components/CustomInput'
+import CustomButton from '@components/general/CustomButton'
+import CustomInput from '@components/general/CustomInput'
 import { useForm } from 'react-hook-form'
 import {
   FormErrorMessage,
   FormControl,
 } from '@chakra-ui/react'
-import LoadingButton from '@components/LoadingButton'
+import LoadingButton from '@components/general/LoadingButton'
 import Image from 'next/image';
 
 const SignIn = () => {
@@ -19,6 +19,7 @@ const SignIn = () => {
   } = useForm();
 
   const onSubmit = (values) => {
+    console.log(values)
     return new Promise((resolve) => {
       setTimeout(() => {
         alert(JSON.stringify(values, null, 2))
@@ -34,7 +35,6 @@ const SignIn = () => {
           <h3 className='text-black'>Enter your phone number to sign in</h3>
           <CustomInput
             type="number"
-            value=""
             label="Phone Number"
             name="phoneNumber"
             icon={<Image src="/assets/images/Tz_flag.svg" alt="flag" width={6} height={9} className='rounded-md w-5 h-8'/>}

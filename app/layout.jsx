@@ -1,5 +1,5 @@
 import '@styles/globals.css'
-import Providers from '@components/Providers'
+import Providers from '@components/general/Providers'
 
 export const metadata = {
   title: 'Faida Dashboard',

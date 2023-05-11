@@ -1,13 +1,13 @@
 "use client";
 
-import CustomButton from '@components/CustomButton'
-import CustomInput from '@components/CustomInput'
+import CustomButton from '@components/general/CustomButton'
+import CustomInput from '@components/general/CustomInput'
 import { useForm } from 'react-hook-form'
 import {
     FormErrorMessage,
     FormControl,
 } from '@chakra-ui/react'
-import LoadingButton from '@components/LoadingButton';
+import LoadingButton from '@components/general/LoadingButton';
 import {useState} from "react";
 
 const VerifyCode = () => {
@@ -21,6 +21,7 @@ const VerifyCode = () => {
     } = useForm();
 
     const onSubmit = (values) => {
+        console.log(values)
         return new Promise((resolve) => {
             setTimeout(() => {
                 alert(JSON.stringify(values, null, 2))
@@ -36,7 +37,6 @@ const VerifyCode = () => {
                     <h3 className='text-black text-sm'>Enter the code that was send to <span className='font-bold'>+255 712345678</span></h3>
                     <CustomInput
                         type={passwordType}
-                        value=""
                         label="OTP"
                         name="otp"
                         width="full"
