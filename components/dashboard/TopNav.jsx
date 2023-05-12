@@ -6,7 +6,6 @@ import React from "react";
 import { HiBars3 } from "react-icons/hi2";
 import { BsBell } from "react-icons/bs";
 import {AiFillCaretDown} from "react-icons/ai"
-// import Avatar from "./Avatar";
 
 const TopNav = ({ toggleSideBar }) => {
     return (

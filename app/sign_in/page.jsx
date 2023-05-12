@@ -37,7 +37,7 @@ const SignIn = () => {
             type="number"
             label="Phone Number"
             name="phoneNumber"
-            icon={<Image src="/assets/images/Tz_flag.svg" alt="flag" width={6} height={9} className='rounded-md w-5 h-8'/>}
+            icon={<Image src="/assets/images/Tz_flag.svg" alt="flag" width={6} height={18} className='rounded-sm w-6 h-18'/>}
             text="+255"
             width="full"
             {...register('phoneNumber', {

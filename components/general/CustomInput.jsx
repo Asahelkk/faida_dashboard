@@ -30,7 +30,7 @@ const CustomInput = ({
             {...rest}
         >
             <label className="text-sm text-gray-600">{label}</label>
-            <Box display={"flex"} alignItems={"center"} gap={2}>
+            <Box display={"flex"} alignItems={"center"} gap={3}>
                 {icon}
                 <span className="text-secondary_color font-semibold">{text}</span>
                 <input

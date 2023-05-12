@@ -6,8 +6,8 @@ const layout = ({ children }) => {
     return (
         <section className='w-full h-full'>
             <div className='flex items-center '>
-                <div className='w-3/5 h-full'>
-                    <img src={"/assets/images/bg_image.png"} alt="bg" className='w-full h-full object-cover' />
+                <div className='w-3/5 max-h-screen'>
+                    <img src={"/assets/images/bg_image.png"} alt="bg" className='w-full max-h-screen object-cover' />
                 </div>
                 <div className='w-2/5 h-full flex justify-center items-center'>
                     <div className='flex flex-col gap-7 w-4/6'>
