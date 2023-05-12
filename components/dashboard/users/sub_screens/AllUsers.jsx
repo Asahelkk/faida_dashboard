@@ -33,9 +33,10 @@ const AllUsers = () => {
                         border={1.0}
                         borderStyle="solid"
                         borderColor="gray.300"
+                        borderRadius={"none"}
                         color="black"
                         width={28}
-                        h={8}
+                        h={9}
                         gap="xs"
                         bg="white"
                         onChange={(e) => updatePerPage(parseInt(e.target.value))}

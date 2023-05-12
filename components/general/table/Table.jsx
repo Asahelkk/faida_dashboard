@@ -15,8 +15,7 @@ const Table = ({
                         <tr>
                             {headers.map((h, index) => (
                                 <th
-                                    className={`text-left ${index === 0 && "text-center"} ${headers[headers.length - 1] === "action" && `text-right`} py-3 px-2 uppercase font-semibold ${size === "sm" ? "text-md" : "text-sm"
-                                        } ${headerClass}`}
+                                    className={`py-6 px-2 uppercase text-center font-semibold text-sm ${headerClass}`}
                                     key={index}
                                 >
                                     {h}

@@ -15,21 +15,21 @@ const Shops = () => {
       <Box width={"full"} bg={"#FCFCFC"} mb={3}>
         <HStack px={14} spacing={0}>
           <SubNavItem
-            height={"12"}
+            height={"14"}
             isCurrent={currentSubNav.toLowerCase() === "map"}
             handleClick={() => setCurrentSubNav("map")}
             title={"MAP"}
             fontSize={"text-sm"}
           />
           <SubNavItem
-            height={"12"}
+            height={"14"}
             isCurrent={currentSubNav.toLowerCase() === "satellite"}
             handleClick={() => setCurrentSubNav("satelite")}
             title={"SATLITE"}
             fontSize={"text-sm"}
           />
           <SubNavItem
-            height={"12"}
+            height={"14"}
             isCurrent={currentSubNav.toLowerCase() === "list"}
             handleClick={() => setCurrentSubNav("list")}
             title={"LIST"}
@@ -38,7 +38,7 @@ const Shops = () => {
         </HStack>
       </Box>
 
-      <Box px={14}>
+      <Box mt={8} px={14}>
         {currentSubNav === "map" ? <ShopMapView />
           : currentSubNav === "satellite" ? <ShopSatelliteView />
             : currentSubNav === "list" && <ShopsListView />
