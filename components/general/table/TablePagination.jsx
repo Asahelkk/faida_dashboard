@@ -23,7 +23,7 @@ const TablePagination = ({
             <HStack spacing={3}>
                 {page <= 1 ? (
                     <Box
-                        fontSize="lg"
+                        fontSize="md"
                         color="gray.500"
                         _active={{
                             transform: 'scale(0.98)',
@@ -34,12 +34,12 @@ const TablePagination = ({
                 ) : (
                     <Box
                         as="button"
-                        fontSize="lg"
+                        fontSize="md"
                         color="#8E7CFB"
                         _active={{
                             transform: 'scale(0.98)',
                         }}
-                        
+                        onClick={() => setPage(page - 1)}
                     >
                         <AiOutlineLeft />
                     </Box>
@@ -55,7 +55,7 @@ const TablePagination = ({
  
                 {page >= count ? (
                     <Box
-                        fontSize="lg"
+                        fontSize="md"
                         color="gray.500"
                         _active={{
                             transform: 'scale(0.98)',
@@ -66,7 +66,7 @@ const TablePagination = ({
                 ) : (
                     <Box
                         as="button"
-                        fontSize="lg"
+                        fontSize="md"
                         color="#8E7CFB"
                         _active={{
                             transform: 'scale(0.98)',

@@ -33,6 +33,7 @@ const AllUsers = () => {
                         border={1.0}
                         borderStyle="solid"
                         borderColor="gray.300"
+                        focusBorderColor="gray.300"
                         borderRadius={"none"}
                         color="black"
                         width={28}
@@ -57,7 +58,7 @@ const AllUsers = () => {
                             placeholder="Type to search User"
                             className="border-0 outline-none focus:outline-none h-8 w-28 flex-grow"
                             type="text"
-                            handleChange={(e) => setSearchValue(e.target.value)}
+                            onChange={(e) => setSearchValue(e.target.value)}
 
                         />
                         <Center

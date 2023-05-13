@@ -12,7 +12,7 @@ const Shops = () => {
 
   return (
     <Box maxH={"91%"} overflowY={"scroll"} position={"relative"}>
-      <Box width={"full"} bg={"#FCFCFC"} mb={3}>
+      <Box width={"full"} bg={"#FCFCFC"}>
         <HStack px={14} spacing={0}>
           <SubNavItem
             height={"14"}
@@ -24,8 +24,8 @@ const Shops = () => {
           <SubNavItem
             height={"14"}
             isCurrent={currentSubNav.toLowerCase() === "satellite"}
-            handleClick={() => setCurrentSubNav("satelite")}
-            title={"SATLITE"}
+            handleClick={() => setCurrentSubNav("satellite")}
+            title={"SATELLITE"}
             fontSize={"text-sm"}
           />
           <SubNavItem
@@ -38,7 +38,7 @@ const Shops = () => {
         </HStack>
       </Box>
 
-      <Box mt={8} px={14}>
+      <Box>
         {currentSubNav === "map" ? <ShopMapView />
           : currentSubNav === "satellite" ? <ShopSatelliteView />
             : currentSubNav === "list" && <ShopsListView />

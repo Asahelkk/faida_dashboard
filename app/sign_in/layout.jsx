@@ -16,6 +16,7 @@ const layout = ({ children }) => {
                             alt="Faida"
                             width={150}
                             height={100}
+                            className='h-auto w-auto'
                         />
                         <h1 className='font-bold text-[44px] text-black capitalize'>Welcome Back!</h1>
                         <div>

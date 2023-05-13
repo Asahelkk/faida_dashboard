@@ -23,7 +23,7 @@ const ShopsListView = () => {
   };
 
   return (
-    <Box>
+    <Box px={14} mt={12}>
       <Box my={6} bg={"white"} py={4} px={8} display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
         <HStack spacing={5}>
           <Text fontWeight="normal" fontSize={"sm"} line-height="short">
@@ -33,6 +33,7 @@ const ShopsListView = () => {
             border={1.0}
             borderStyle="solid"
             borderColor="gray.300"
+            focusBorderColor="gray.300"
             borderRadius={"none"}
             color="black"
             width={28}
@@ -57,7 +58,7 @@ const ShopsListView = () => {
               placeholder="Type to search User"
               className="border-0 outline-none focus:outline-none h-8 w-28 flex-grow"
               type="text"
-              handleChange={(e) => setSearchValue(e.target.value)}
+              onChange={(e) => setSearchValue(e.target.value)}
 
             />
             <Center

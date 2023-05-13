@@ -29,7 +29,8 @@ const SideNav = ({ show }) => {
                     src="/assets/images/Faida_App_Logo-012.png"
                     alt="Faida"
                     height={100}
-                    width={150}
+                    width={100}
+                    className='h-auto w-auto'
                 />
             </Box>
 

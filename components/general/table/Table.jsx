@@ -8,7 +8,7 @@ const Table = ({
     footer,
 }) => {
     return (
-        <div className="w-full bg-white px-8">
+        <div className="w-full bg-white px-8 ">
             <div>
                 <table className="min-w-full">
                     <thead className="border-b">
@@ -26,7 +26,7 @@ const Table = ({
                     <tbody className="font-normal text-md">{children}</tbody>
                 </table>
 
-                <div className="min-w-full my-4">{footer}</div>
+                <div className="min-w-full pt-4 pb-8">{footer}</div>
             </div>
         </div>
     );
