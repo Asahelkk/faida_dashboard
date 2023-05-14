@@ -36,7 +36,7 @@ const VerifyCode = () => {
     return (
         <div>
             <form>
-                <FormControl isInvalid={errors.name} cdisplay={"flex"} flexDirection={"column"} gap={4}>
+                <FormControl isInvalid={errors.name} display={"flex"} flexDirection={"column"} gap={4}>
                     <h3 className='text-black text-sm'>Enter the code that was send to <span className='font-bold'>+255 712345678</span></h3>
                     <CustomInput
                         type={passwordType}
