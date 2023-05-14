@@ -1,21 +1,31 @@
-import { Button } from "@chakra-ui/react";
+import { Box, Spinner, Text } from "@chakra-ui/react";
 import React from "react";
 
-const LoadingButton = ({ ...rest }) => {
+const LoadingButton = ({ width, height, fontSize, ...rest }) => {
     return (
-        <Button
-            isLoading
-            loadingText="Loading"
+        <Box
             cursor={"pointer"}
             borderRadius={"md"}
-            bg={"#8E7CFB"}
-            className={"text-white text-xl"}
-            w={"full"}
-            spinnerPlacement="end"
+            className={"bg-white text-primary_color_faded border-2 border-primary_color_faded"}
+            lineHeight='1.2'
+            width={width ? width : "full"}
+            height={height ? height : "50px"}
+            fontSize={fontSize ? fontSize : "16px"}
+            fontWeight='semibold'
+            display={"flex"}
+            alignItems={"center"}
+            justifyContent={"center"}
+            gap={3}
             {...rest}
         >
-            Continue
-        </Button>
+            <Spinner
+                thickness={'2px'}
+                emptyColor={'gray.200'}
+                color={'#A79AF5'}
+                size={'md'}
+            />
+            <Text>Loading</Text>
+        </Box>
     );
 };
 
