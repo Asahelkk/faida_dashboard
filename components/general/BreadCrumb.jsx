@@ -3,14 +3,15 @@
 import { Box, Text } from '@chakra-ui/react';
 import React from 'react';
 
-const BreadCrumb = ({ title, subtitle }) => {
+const BreadCrumb = ({ title, subtitle, fontSize }) => {
   return (
     <Box className="flex items-end gap-1">
-      <Text className={'capitalize'} fontWeight={"semibold"} fontSize={"3xl"}>
-        {title} {subtitle && ':'}
+      <Text className={'capitalize'} fontWeight={"semibold"} fontSize={fontSize ? fontSize : "3xl"} letterSpacing={1}>
+        {title}{subtitle && ':'}
       </Text>
+
       {subtitle && (
-        <Text className={'capitalize'} fontSize={"3xl"}>
+        <Text className={'capitalize'} fontSize={fontSize ? fontSize : "3xl"} letterSpacing={1}>
           {subtitle}
         </Text>
       )}

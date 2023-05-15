@@ -101,7 +101,7 @@ const AllUsers = () => {
                     return (
                         <tr key={index} className="h-20 border-b">
                             <td className="py-3 px-4 text-sm text-center">
-                                <Checkbox />
+                                <Checkbox colorScheme='purple' />
                             </td>
                             <td className="py-3 px-4 text-sm">{data?.name}</td>
                             <td className="py-3 px-4 text-sm">{data?.phone}</td>

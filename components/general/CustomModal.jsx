@@ -1,37 +1,27 @@
 "use client";
 
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalBody,
-    ModalCloseButton,
-} from '@chakra-ui/react'
-
 
 const CustomModal = (
     {
         isOpen,
         onClose,
-        size,
-        children
+        children,
+        width,
     }) => {
     return (
         <>
-            <Modal
-                isOpen={isOpen}
-                onClose={onClose}
-                motionPreset='slideInBottom'
-                size={size}
-            >
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalCloseButton />
-                    <ModalBody pb={6}>
-                        {children}
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
+            {isOpen &&
+                <div className='w-full h-full fixed top-0 left-24 right-0 bottom-0'>
+                    <div className='w-full h-full fixed top-0 left-60 right-0 bottom-0 bg-[#e5e5e5a1]' />
+                    <div className={`flex justify-center`}>
+                        <div className={`absolute top-32 bg-white rounded-xl ${width}`} onClick={() => onClose()}>
+                            <div>
+                                {children}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </>
     )
 }

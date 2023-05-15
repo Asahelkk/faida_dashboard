@@ -1,35 +1,51 @@
 "use client";
 
-import { useState, useEffect } from 'react'
-import loader from '@utils/googleMapLoader'
+// import { useState, useEffect } from 'react'
+// import loader from '@utils/googleMapLoader'
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-const Map = ({ address }) => {
-    const [map, setMap] = useState(null);
+const Map = ({ lat, lng }) => {
+    // const [map, setMap] = useState(null);
 
-    useEffect(() => {
-        loader.load().then(() => {
-            const geocoder = new window.google.maps.Geocoder();
-            geocoder.geocode({ address }, (results, status) => {
-                if (status === 'OK') {
-                    const mapOptions = {
-                        center: results[0].geometry.location,
-                        zoom: 16,
-                    };
-                    const newMap = new window.google.maps.Map(
-                        document.getElementById('map'),
-                        mapOptions
-                    );
-                    const marker = new window.google.maps.Marker({
-                        position: results[0].geometry.location,
-                        map: newMap,
-                    });
-                    setMap(newMap);
-                }
-            });
-        });
-    }, [address]);
+    // useEffect(() => {
+    //     loader.load().then(() => {
+    //         const mapOptions = {
+    //             center: { lat, lng },
+    //             zoom: 16,
+    //         };
+    //         const newMap = new window.google.maps.Map(
+    //             document.getElementById('map'),
+    //             mapOptions
+    //         );
+    //         const marker = new window.google.maps.Marker({
+    //             position: { lat, lng },
+    //             map: newMap,
+    //         });
+    //         setMap(newMap);
+    //     });
+    // }, [lat, lng]);
+
+    const mapContainerStyle = {
+        width: '100%',
+        height: '100%',
+    };
+
+    const center = {
+        lat,
+        lng
+    };
     return (
-        <div id="map" className='w-full h-full relative'></div>
+        <div className='w-full h-full relative'>
+            <LoadScript googleMapsApiKey={process.env.GOOGLE_MAP_API_KEY}>
+                <GoogleMap
+                    mapContainerStyle={mapContainerStyle}
+                    center={center}
+                    zoom={14}
+                >
+                    <Marker position={center} />
+                </GoogleMap>
+            </LoadScript>
+        </div>
     )
 }
 

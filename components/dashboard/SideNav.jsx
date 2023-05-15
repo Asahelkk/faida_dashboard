@@ -2,6 +2,7 @@ import { Center, HStack, Text, Box, VStack } from "@chakra-ui/react"
 import { FiLogOut } from "react-icons/fi"
 import { MdDashboard } from "react-icons/md"
 import { IoSettingsOutline, IoArchiveOutline } from "react-icons/io5"
+import { IoIosAdd } from "react-icons/io"
 import { AiOutlineShop } from "react-icons/ai"
 import { FaRegUser } from "react-icons/fa"
 import Image from 'next/image';
@@ -17,7 +18,7 @@ const SideNav = ({ show }) => {
 
     return (
         <Box
-            w={"250px"}
+            w={"240px"}
             bg={"#161433"}
             className={`h-screen ${!show && "hidden"} ease-in-out `}
             flexShrink={0}
@@ -41,6 +42,7 @@ const SideNav = ({ show }) => {
                         icon={menu.icon}
                         title={menu.name}
                         link={menu.to}
+                        subs={menu?.subs}
                         isCurrent={menu.name.toLowerCase() === current}
                         handleClick={() => handleCurrent(menu.name)}
                     />
@@ -86,6 +88,7 @@ const MenuItem = ({
     icon,
     title,
     link,
+    subs,
     isCurrent,
     handleClick,
 }) => (
@@ -117,9 +120,48 @@ const MenuItem = ({
                 </HStack>
             </Box>
         </Link>
-
+        {isCurrent &&
+            subs?.length > 0 &&
+            subs?.map((sub, index) => (
+                <SubMenu
+                    key={index}
+                    icon={sub?.icon}
+                    title={sub?.name}
+                    link={sub?.to}
+                />
+            ))}
     </Box>
 );
+
+const SubMenu = ({ icon, title, link }) => (
+    <Link href={link}>
+        <Box
+            mt={3}
+            cursor={"pointer"}
+            borderRadius={"md"}
+            w={"full"}
+            _className={"hover:scale-105 transition-all"}
+            pl={6}
+        >
+            <HStack gap={"0.5"} h={"8"}>
+                {/* icon */}
+                <Center
+                    h={"5"}
+                    w={"5"}
+                    textColor={"white"}
+                    fontSize={"lg"}
+                >
+                    {icon}
+                </Center>
+
+                {/* name */}
+                <Text textColor={"white"} fontSize={"sm"}>{title}</Text>
+            </HStack>
+        </Box>
+    </Link>
+
+);
+
 
 
 const menu_list = [
@@ -136,7 +178,19 @@ const menu_list = [
     {
         name: "Products",
         to: "/dashboard/products",
-        icon: <IoArchiveOutline />
+        icon: <IoArchiveOutline />,
+        subs: [
+            {
+                name: "Create Category",
+                to: "/dashboard/categories",
+                icon: <IoIosAdd />,
+            },
+            {
+                name: "Create SubCategory",
+                to: "/dashboard/sub_categories",
+                icon: <IoIosAdd />,
+            },
+        ]
     },
     {
         name: "User Accounts",

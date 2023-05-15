@@ -27,7 +27,7 @@ const CustomButton = ({ text, fontSize, handleClick, variant, icon, type, width,
                     : variant === "danger" &&
                     `bg-white text-primary_red border-2 border-primary_red hover:text-primary_red hover:border-primary_red`}`}
         >
-            <Box className='flex justify-center items-center gap-3'>
+            <Box className='flex justify-center items-center gap-2'>
                 {icon}
                 {text}
             </Box>

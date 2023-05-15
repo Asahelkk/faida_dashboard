@@ -1,6 +1,6 @@
 "use client"
 
-import { Box, Center, HStack, Select, Text } from '@chakra-ui/react'
+import { Box, Center, HStack, Select, Text, VStack } from '@chakra-ui/react'
 import Table from '@components/general/table/Table'
 import TablePagination from '@components/general/table/TablePagination'
 import React, { useState } from 'react'
@@ -9,6 +9,7 @@ import Link from 'next/link'
 import CustomButton from '@components/general/CustomButton'
 import { useTable } from '@hooks/useTable'
 import { numberWithCommas } from '@utils/numberWithCommas'
+
 
 const ShopsListView = () => {
   const [searchValue, setSearchValue] = useState("");
