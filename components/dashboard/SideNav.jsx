@@ -35,7 +35,7 @@ const SideNav = ({ show }) => {
                 />
             </Box>
 
-            <VStack gap={"3"} p={"2"} h={"55%"}>
+            <VStack gap={"3"} p={"2"} h={"63%"}>
                 {menu_list.map((menu, key) => (
                     <MenuItem
                         key={key}

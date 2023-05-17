@@ -14,9 +14,8 @@ const layout = ({ children }) => {
                         <Image
                             src={"/assets/images/faida_app_logo_008.png"}
                             alt="Faida"
-                            width={150}
-                            height={100}
-                            className='h-auto w-auto'
+                            width={170}
+                            height={120}
                         />
                         <h1 className='font-bold text-[44px] text-black capitalize'>Welcome Back!</h1>
                         <div>

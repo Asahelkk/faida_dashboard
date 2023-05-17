@@ -75,6 +75,7 @@ const ShopsListView = () => {
       </Box>
       <Table
         headers={["shop name", "owner", "phone number", "total sales", "last activity", "action"]}
+        paddingX={"px-8"}
         footer={
           <TablePagination
             pages={pages}

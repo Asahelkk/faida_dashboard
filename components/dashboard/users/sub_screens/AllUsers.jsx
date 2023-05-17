@@ -74,6 +74,7 @@ const AllUsers = () => {
             </Box>
             <Table
                 headers={["select", "name", "phone", "status", "action"]}
+                paddingX={"px-8"}
                 footer={
                     <TablePagination
                         pages={pages}

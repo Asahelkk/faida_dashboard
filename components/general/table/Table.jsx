@@ -1,21 +1,22 @@
 import React from "react";
 
 const Table = ({
-    size,
     headers,
     children,
-    headerClass,
+    transformation,
     footer,
+    headerColor,
+    paddingX
 }) => {
     return (
-        <div className="w-full bg-white px-8 ">
+        <div className={`w-full bg-white ${paddingX}`}>
             <div>
                 <table className="min-w-full">
-                    <thead className="border-b">
+                    <thead className={headerColor ? headerColor : `border-b`}>
                         <tr>
                             {headers.map((h, index) => (
                                 <th
-                                    className={`py-6 px-2 uppercase text-center font-semibold text-sm ${headerClass}`}
+                                    className={`py-4 px-2 ${transformation ? transformation : `uppercase`} text-center font-semibold text-sm`}
                                     key={index}
                                 >
                                     {h}

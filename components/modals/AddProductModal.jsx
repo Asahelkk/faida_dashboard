@@ -3,15 +3,21 @@
 import CustomButton from '@components/general/CustomButton'
 import CustomModal from '@components/general/CustomModal'
 import { Box, FormControl, FormLabel, HStack, Select, Text } from '@chakra-ui/react';
+import { useState } from 'react';
 
 const AddProductModal = ({ isOpen, onClose }) => {
+
+    const [image, setImage] = useState("");
+
+    console.log(image)
     return (
         <CustomModal
             isOpen={isOpen}
             onClose={onClose}
             width={"w-3/4"}
+            top={"top-16"}
         >
-            <Box py={16} px={16} width={"full"}>
+            <Box py={8} px={16} width={"full"}>
                 <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} mb={4}>
                     <Text fontSize={"2xl"} fontWeight={"normal"}>Product Information</Text>
                     <HStack spacing={4}>
@@ -40,6 +46,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                     <FormControl my={4}>
                         <FormLabel className='text-gray-500'>Picture</FormLabel>
                         <Box
+                            cursor={"pointer"}
                             p={2}
                             w={"full"}
                             borderWidth={"1px"}
@@ -49,11 +56,12 @@ const AddProductModal = ({ isOpen, onClose }) => {
                             borderRadius={"md"}
                             bg={"gray.100"}
                         >
-                            <Text textColor={"gray.400"}>Browser picture from your Computer</Text>
+                            <Text textColor={"gray.400"} py={1}>Browser picture from your Computer</Text>
                             <input
-                                placeholder="+255 742 423 435"
                                 className="border-0 outline-none focus:outline-none h-8 flex-grow hidden"
                                 type="file"
+                                style={{ display: "none" }}
+                                onChange={(e) => setImage(e.target.files)}
                             />
                         </Box>
                     </FormControl>
@@ -104,7 +112,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                                 focusBorderColor="#8E7CFB"
                                 color="gray.400"
                                 width={"full"}
-                                h={10}
+                                h={12}
                                 gap="xs"
                                 bg="white"
                             >
@@ -121,7 +129,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                                 focusBorderColor="#8E7CFB"
                                 color="gray.400"
                                 width={"full"}
-                                h={10}
+                                h={12}
                                 gap="xs"
                                 bg="white"
                             >
