@@ -88,7 +88,7 @@ const ShopDetails = () => {
                     </Box>
                 </Box>
                 <Table
-                    headers={["shop name", "shopkeeper name", "phone number", "total sales", "last activity", "status"]}
+                    headers={["shop name", "shopkeeper name", "phone number", "total sales", "last activity"]}
                     footer={
                         <TablePagination
                             pages={pages}
@@ -106,15 +106,6 @@ const ShopDetails = () => {
                                 shop.phone_number.toLowerCase().includes(searchValue.toLowerCase())
                         )
                     })?.map((data, index) => {
-                        const status = STATUS_LIST[data?.shop_status];
-                        const textaColor =
-                            data?.shop_status
-                                ? "text-primary_green"
-                                : "text-primary_red";
-                        const bg =
-                            data?.shop_status
-                                ? "bg-gray-300"
-                                : "bg-primary_red";
                         return (
                             <tr key={index} className="h-20 border-b">
                                 <td className="py-3 px-4 text-sm">{data?.shop_name}</td>
@@ -122,14 +113,6 @@ const ShopDetails = () => {
                                 <td className="py-3 px-4 text-sm">{data?.phone_number}</td>
                                 <td className="py-3 px-4 text-sm">{numberWithCommas(Number(data?.total_sale))} Tsh</td>
                                 <td className="py-3 px-4 text-sm">{data?.last_activity}</td>
-                                <td className="py-3 px-4 text-sm">
-                                    <div className='flex items-center gap-4'>
-                                        <div className={`h-3 w-3 rounded-full ${bg}`} />
-                                        <div className={`text-center ${textaColor}`}>
-                                            {status}
-                                        </div>
-                                    </div>
-                                </td>
                             </tr>
                         )
                     })}
@@ -150,8 +133,7 @@ const shop_list = [
         owner: "Almas James",
         phone_number: "+255 721 543 525",
         total_sale: "4442400",
-        last_activity: "12 June 2021",
-        shop_status: true
+        last_activity: "12 June 2021"
     },
     {
         _id: 2,
@@ -159,8 +141,7 @@ const shop_list = [
         owner: "Almas James",
         phone_number: "+255 721 543 525",
         total_sale: "4442400",
-        last_activity: "12 June 2021",
-        shop_status: true
+        last_activity: "12 June 2021"
     },
     {
         _id: 3,
@@ -168,8 +149,7 @@ const shop_list = [
         owner: "Almas James",
         phone_number: "+255 721 543 525",
         total_sale: "4442400",
-        last_activity: "12 June 2021",
-        shop_status: true
+        last_activity: "12 June 2021"
     },
     {
         _id: 1,
@@ -177,8 +157,7 @@ const shop_list = [
         owner: "Almas James",
         phone_number: "+255 721 543 525",
         total_sale: "4442400",
-        last_activity: "12 June 2021",
-        shop_status: true
+        last_activity: "12 June 2021"
     },
     {
         _id: 3,
@@ -186,8 +165,7 @@ const shop_list = [
         owner: "Almas James",
         phone_number: "+255 721 543 525",
         total_sale: "4442400",
-        last_activity: "12 June 2021",
-        shop_status: true
+        last_activity: "12 June 2021"
     },
     {
         _id: 5,
@@ -195,8 +173,7 @@ const shop_list = [
         owner: "Almas James",
         phone_number: "+255 721 543 525",
         total_sale: "4442400",
-        last_activity: "12 June 2021",
-        shop_status: true
+        last_activity: "12 June 2021"
     },
     {
         _id: 6,
@@ -204,8 +181,7 @@ const shop_list = [
         owner: "Almas James",
         phone_number: "+255 721 543 525",
         total_sale: "4442400",
-        last_activity: "12 June 2021",
-        shop_status: true
+        last_activity: "12 June 2021"
     }
 ]
 

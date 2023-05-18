@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import BreadCrumb from '@components/general/BreadCrumb'
-import { Box, Text, Flex } from '@chakra-ui/react'
+import { Box, Text } from '@chakra-ui/react'
 import CustomSelect from '../CustomSelect'
 import TimePeriodFilter from '../TimePeriodFilter';
 import DashboardCard from '../cards/DashboardCard';
@@ -14,19 +14,22 @@ import { RxTable } from "react-icons/rx"
 import Table from '@components/general/table/Table'
 import TablePagination from '@components/general/table/TablePagination'
 import { useTable } from '@hooks/useTable'
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 const Overview = () => {
 
     const [page, setPage] = useState(1);
     const [bestSellingProducts, setBestSellingProducts] = useState([]);
     const [bestSalesPersons, setBestSalesPersons] = useState([]);
+    const [topStores, setTopStores] = useState([]);
     const perPage = 8;
 
     const { slice, pages, count } = useTable(sales_list, page, perPage);
 
     useEffect(() => {
         setBestSellingProducts(best_selling_products?.slice(0, 4));
-        setBestSalesPersons(best_sells_people?.slice(0, 4))
+        setBestSalesPersons(best_sells_people?.slice(0, 4));
+        setTopStores(top_stores.slice(0, 4));
     }, []);
 
     const handleViewMoreProducts = () => {
@@ -43,6 +46,14 @@ const Overview = () => {
 
     const handleViewLessPeople = () => {
         setBestSalesPersons(best_sells_people?.slice(0, 4));
+    };
+
+    const handleViewMoreTopStores = () => {
+        setTopStores(top_stores);
+    };
+
+    const handleViewLessTopStores = () => {
+        setTopStores(top_stores.slice(0, 4));
     };
 
     return (
@@ -126,7 +137,11 @@ const Overview = () => {
                                 <AiFillSetting className='text-3xl p-1 border rounded-full cursor-pointer' />
                             </Box>
                         </Box>
-                        <Box mt={1} borderY={"1px"} borderColor={"gray.300"} width={"full"}>
+                        {/* Select */}
+                        <Box px={3} pt={4}>
+                            <LayoutStrutureSelect currentSelect={"table"} />
+                        </Box>
+                        <Box mt={3} borderY={"1px"} borderColor={"gray.300"} width={"full"}>
                             <Box mx={3}>
                                 <table className="min-w-full mt-4">
                                     <thead>
@@ -178,10 +193,40 @@ const Overview = () => {
                         <Box px={3} pt={4}>
                             <LayoutStrutureSelect currentSelect={"chart"} />
                         </Box>
-                        <Box mt={1} borderY={1} borderColor={"gray.300"} width={"full"}>
-
+                        <Box mt={3} borderY={"1px"} borderColor={"gray.300"} width={"full"}>
+                            <Box mx={3} width={"full"}>
+                                <ResponsiveContainer width="100%" height="100%">
+                                    <BarChart
+                                        width={500}
+                                        height={300}
+                                        data={topStores}
+                                    // margin={{
+                                    //     top: 5,
+                                    //     right: 30,
+                                    //     left: 20,
+                                    //     bottom: 5,
+                                    // }}
+                                    >
+                                        <CartesianGrid strokeDasharray="3 3" />
+                                        <XAxis dataKey="name" />
+                                        <YAxis />
+                                        <Tooltip />
+                                        <Bar dataKey="revenue" fill="#8884d8" />
+                                    </BarChart>
+                                </ResponsiveContainer>
+                            </Box>
                         </Box>
+                        {topStores?.length === 4 ?
+                            <Box pt={4} textAlign={"center"} >
+                                <p onClick={handleViewMoreTopStores} className={"text-primary_color cursor-pointer text-sm hover:font-semibold tracking-wide"}>See full report</p>
+                            </Box>
+                            : topStores?.length > 4 &&
+                            <Box pt={4} textAlign={"center"}>
+                                <p onClick={handleViewLessTopStores} className={"text-primary_color cursor-pointer text-sm hover:font-semibold tracking-wide"}>Minimize report</p>
+                            </Box>
+                        }
                     </Box>
+
 
                     {/* Top Sales people */}
                     <Box width={"full"} bg={"white"} pt={6} pb={3} borderRadius={"lg"}>
@@ -198,7 +243,7 @@ const Overview = () => {
                         <Box px={3} pt={4}>
                             <LayoutStrutureSelect currentSelect={"table"} />
                         </Box>
-                        <Box mt={1} borderY={1} borderColor={"gray.300"} width={"full"}>
+                        <Box mt={3} borderY={"1px"} borderColor={"gray.300"} width={"full"}>
                             <Box mx={3}>
                                 <table className="min-w-full mt-4">
                                     <thead>
@@ -369,6 +414,57 @@ const best_selling_products = [
     {
         product: "Mo Energy",
         sales: "67833000"
+    },
+]
+
+const top_stores = [
+    {
+        name: "Mark Paul",
+        revenue: 67833000
+    },
+    {
+        name: "Cluadian Benet",
+        revenue: 330500
+    },
+    {
+        name: "Mercy Allen",
+        revenue: 1238000
+    },
+    {
+        name: "Samuel Ricks",
+        revenue: 67833000
+    },
+    {
+        name: "Mark Paul",
+        revenue: 67833000
+    },
+    {
+        name: "Cluadian Benet",
+        revenue: 330500
+    },
+    {
+        name: "Mercy Allen",
+        revenue: 1238000
+    },
+    {
+        name: "Samuel Ricks",
+        revenue: 67833000
+    },
+    {
+        name: "Mark Paul",
+        revenue: 67833000
+    },
+    {
+        name: "Cluadian Benet",
+        revenue: 330500
+    },
+    {
+        name: "Mercy Allen",
+        revenue: 1238000
+    },
+    {
+        name: "Samuel Ricks",
+        revenue: 67833000
     },
 ]
 
