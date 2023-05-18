@@ -19,14 +19,6 @@ const Dashboard = () => {
             fontSize={"text-sm"}
             textAlign={"center"}
           />
-          <SubNavItem
-            height={"14"}
-            isCurrent={currentSubNav.toLowerCase() === "daily stats"}
-            handleClick={() => setCurrentSubNav("daily stats")}
-            title={"Daily stats"}
-            fontSize={"text-sm"}
-            textAlign={"center"}
-          />
         </HStack>
       </Box>
 

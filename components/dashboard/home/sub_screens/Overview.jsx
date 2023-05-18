@@ -51,8 +51,8 @@ const Overview = () => {
                 <BreadCrumb title={"Overview"} />
             </Box>
             <Box display={"flex"} alignItems={"end"} gap={4}>
-                <CustomSelect label={"Merchants"} />
-                <CustomSelect label={"Products"} />
+                <CustomSelect label={"Merchants"} type={"S"} options={suppliers_options} />
+                <CustomSelect label={"Products"} type={"P"} options={products_options} />
                 <TimePeriodFilter />
             </Box>
             <Box display={"flex"} gap={3} mt={10}>
@@ -316,6 +316,10 @@ const LayoutStrutureSelect = ({ currentSelect }) => {
     )
 
 }
+
+const suppliers_options = ["Supplier X", "Supplier Y", "Supplier Z"]
+
+const products_options = ["Rice", "Sugar", "Flour"]
 
 const best_selling_products = [
     {
