@@ -1,52 +1,55 @@
 "use client";
 
-// import { useState, useEffect } from 'react'
-// import loader from '@utils/googleMapLoader'
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { useEffect, useRef } from 'react'
+import loader from '@utils/googleMapLoader'
+import { Box } from '@chakra-ui/react';
+// import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const Map = ({ lat, lng }) => {
-    // const [map, setMap] = useState(null);
+    const mapRef = useRef(null);
 
-    // useEffect(() => {
-    //     loader.load().then(() => {
-    //         const mapOptions = {
-    //             center: { lat, lng },
-    //             zoom: 16,
-    //         };
-    //         const newMap = new window.google.maps.Map(
-    //             document.getElementById('map'),
-    //             mapOptions
-    //         );
-    //         const marker = new window.google.maps.Marker({
-    //             position: { lat, lng },
-    //             map: newMap,
-    //         });
-    //         setMap(newMap);
-    //     });
-    // }, [lat, lng]);
+    useEffect(() => {
+        loader.load()
+            .then(async () => {
+                const { Map } = await google.maps.importLibrary("maps");
 
-    const mapContainerStyle = {
-        width: '100%',
-        height: '100%',
-    };
+                new Map(mapRef.current, {
+                    center: { lat: -34.397, lng: 150.644 },
+                    zoom: 8,
+                });
+            })
+            .catch(e => {
+                console.log(e)
+            });
 
-    const center = {
-        lat,
-        lng
-    };
-    return (
-        <div className='w-full h-full relative'>
-            <LoadScript googleMapsApiKey={process.env.GOOGLE_MAP_API_KEY}>
-                <GoogleMap
-                    mapContainerStyle={mapContainerStyle}
-                    center={center}
-                    zoom={14}
-                >
-                    <Marker position={center} />
-                </GoogleMap>
-            </LoadScript>
-        </div>
-    )
+    }, [lat, lng]);
+
+    return <Box ref={mapRef} width={"100%"} height={"100%"} />;
+
+    // const mapContainerStyle = {
+    //     width: '100%',
+    //     height: '100%',
+    // };
+
+    // const center = {
+    //     lat,
+    //     lng
+    // };
+
+    // return (
+    //     <div>
+    //         <LoadScript googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAP_API_KEY}>
+    //             <GoogleMap
+    //                 mapContainerStyle={mapContainerStyle}
+    //                 center={center}
+    //                 zoom={10}
+    //             >
+    //                 <Marker position={center} />
+    //             </GoogleMap>
+    //         </LoadScript>
+    //     </div>
+
+    // );
 }
 
 export default Map

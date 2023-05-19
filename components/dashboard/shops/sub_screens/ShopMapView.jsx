@@ -8,8 +8,8 @@ const ShopMapView = () => {
 
     return (
         <div>
-            <Map lat={-1.291917} lng={36.822278}>
-                <Box className='absolute top-8 left-6'>
+            <Map lat={-1.291917} lng={36.822278} />
+            {/* <Box className='absolute top-8 left-6'>
                     <VStack spacing={5} width={"50px"}>
                         <Box width={"full"} p={4} bg={"white"}>
                             <Text fontSize={"sm"} textColor={"black"}>Total registered shop</Text>
@@ -69,8 +69,7 @@ const ShopMapView = () => {
                             </Box>
                         </Box>
                     </VStack>
-                </Box>
-            </Map>
+                </Box> */}
         </div>
     )
 }
