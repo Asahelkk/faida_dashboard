@@ -20,7 +20,7 @@ const CustomButton = ({ text, fontSize, handleClick, variant, icon, type, width,
             }}
             onClick={handleClick}
             {...rest}
-            className={`rounded-md  ${variant === "solid" ?
+            className={`rounded-md hover:scale-105 transition-all  ${variant === "solid" ?
                 `bg-primary_color text-white hover:bg-primary_color` :
                 variant === "outline" ?
                     `bg-white text-primary_color border-2 border-primary_color hover:text-primary_color hover:border-primary_color`

@@ -13,7 +13,7 @@ const Map = ({ lat, lng }) => {
                 const { Map } = await google.maps.importLibrary("maps");
 
                 new Map(mapRef.current, {
-                    center: { lat: -34.397, lng: 150.644 },
+                    center: { lat, lng },
                     zoom: 8,
                 });
             })

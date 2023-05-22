@@ -1,32 +1,58 @@
 "use client";
 
+import { useState } from 'react'
+import { useToast } from '@chakra-ui/react'
 import CustomButton from '@components/general/CustomButton'
 import CustomInput from '@components/general/CustomInput'
-import { useForm } from 'react-hook-form'
-import {
-    FormErrorMessage,
-    FormControl,
-} from '@chakra-ui/react'
+import { FormControl } from '@chakra-ui/react'
 import LoadingButton from '@components/general/LoadingButton'
-import { useState } from "react"
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'
+import { toastProps } from '@utils/toastHelper'
+import { useUserPhoneNumberStore } from '@utils/zustand/Store';
 
 const VerifyCode = () => {
 
     const router = useRouter();
+    const toast = useToast();
+    const user = useUserPhoneNumberStore((state) => state.user);
+    const removePhoneNumber = useUserPhoneNumberStore((state) => state.removePhoneNumber);
 
     const [passwordType, setPasswordType] = useState("password");
+    const [isSubmitting, setIsubmitting] = useState(false);
+    const [otp, setOtp] = useState("");
 
-    const {
-        handleSubmit,
-        register,
-        formState: { errors, isSubmitting },
-    } = useForm();
+    // Handle input validation
+    const handleValidation = () => {
+        if (otp === "") {
+            toast({
+                ...toastProps,
+                title: "Error!",
+                description: "Please input the otp code send to your phone number to login",
+                status: "error",
+            });
 
-    const onSubmit = (values) => {
+            return false;
+        }
+
+        return true;
+    }
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const isValid = handleValidation();
+
+        // Verify validation before submitting
+        if (!isValid) return;
+
+        setIsubmitting(true);
+
+        removePhoneNumber();
+
         return new Promise((resolve) => {
             setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
+                alert(JSON.stringify(otp))
                 router.push('/dashboard');
                 resolve()
             }, 2000)
@@ -36,24 +62,18 @@ const VerifyCode = () => {
     return (
         <div>
             <form>
-                <FormControl isInvalid={errors.name} display={"flex"} flexDirection={"column"} gap={4}>
-                    <h3 className='text-black text-sm'>Enter the code that was send to <span className='font-bold'>+255 712345678</span></h3>
+                <FormControl display={"flex"} flexDirection={"column"} gap={4}>
+                    <h3 className='text-black text-sm'>Enter the code that was send to <span className='font-bold'>{user.phoneNumber}</span></h3>
                     <CustomInput
                         type={passwordType}
                         label="OTP"
                         name="otp"
                         width="full"
                         handleEyeClick={(type) => setPasswordType(type)}
-                        // {...register('otp', {
-                        //     required: 'OTP is required',
-                        //     minLength: { value: 5, message: 'Minimum length should be 5' },
-                        // })}
+                        handleChange={(e) => setOtp(e.target.value)}
                     />
-                    <FormErrorMessage>
-                        {errors.name && errors.name.message}
-                    </FormErrorMessage>
                     <p className='text-sm'>Didnt Recieve OTP <span className="text-primary_color underline hover:cursor-pointer">Resend Now</span></p>
-                    {isSubmitting ? <LoadingButton /> : <CustomButton handleClick={handleSubmit(onSubmit)} type="submit" text="Login" variant={"solid"} width={"full"} />}
+                    {isSubmitting ? <LoadingButton /> : <CustomButton handleClick={handleSubmit} type="submit" text="Login" variant={"solid"} width={"full"} />}
                 </FormControl>
             </form>
 

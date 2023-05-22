@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { format, startOfWeek, endOfWeek, addDays, isSameMonth, parse, addMonths, subMonths, startOfMonth, endOfMonth, isSameDay } from 'date-fns';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { border } from "@chakra-ui/react";
 
 const Calendar = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -12,39 +13,37 @@ const Calendar = () => {
         const dateFormat = "MMMM yyyy";
 
         return (
-            <div className="header row flex-middle">
-                <div className="col col-start">
-                    <div className="icon" onClick={prevMonth}>
-                        <MdKeyboardArrowLeft />
-                    </div>
+            <div className="flex justify-between items-center py-2">
+                <div className="cursor-pointer" onClick={prevMonth}>
+                    <MdKeyboardArrowLeft className="text-xl" />
                 </div>
-                <div className="col col-center">
+                <div className="">
                     <span>{format(currentMonth, dateFormat)}</span>
                 </div>
-                <div className="col col-end" onClick={nextMonth}>
-                    <div className="icon">
-                        <MdKeyboardArrowRight />
-                    </div>
+                <div className="cursor-pointer" onClick={nextMonth}>
+                    <MdKeyboardArrowRight className="text-xl" />
                 </div>
             </div>
         );
     };
 
     const renderDays = () => {
-        const dateFormat = "dddd";
+        const dateFormat = "eee";
         const days = [];
 
         let startDate = startOfWeek(currentMonth);
 
+        console.log(startDate)
+
         for (let i = 0; i < 7; i++) {
             days.push(
-                <div className="col col-center" key={i}>
+                <div className="" key={i}>
                     {format(addDays(startDate, i), dateFormat)}
                 </div>
             );
         }
 
-        return <div className="days row">{days}</div>;
+        return <div className="flex items-center gap-2 py-1">{days}</div>;
     };
 
     const renderCells = () => {
@@ -66,27 +65,26 @@ const Calendar = () => {
                 const cloneDay = day;
                 days.push(
                     <div
-                        className={`col cell ${!isSameMonth(day, monthStart)
+                        className={`border-r ${!isSameMonth(day, monthStart)
                             ? "disabled"
-                            : isSameDay(day, selectedDate) ? "selected" : ""
+                            : isSameDay(day, selectedDate) ? "bg-primary_color text-white" : ""
                             }`}
                         key={day}
                         onClick={() => onDateClick(parse(cloneDay))}
                     >
-                        <span className="number">{formattedDate}</span>
-                        <span className="bg">{formattedDate}</span>
+                        <span className="">{formattedDate}</span>
                     </div>
                 );
                 day = addDays(day, 1);
             }
             rows.push(
-                <div className="row" key={day}>
+                <div className="flex items-center gap-4 w-full border-b" key={day}>
                     {days}
                 </div>
             );
             days = [];
         }
-        return <div className="body">{rows}</div>;
+        return <div className="mt-2">{rows}</div>;
     };
 
     const onDateClick = (day) => {

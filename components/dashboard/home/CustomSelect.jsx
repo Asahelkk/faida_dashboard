@@ -58,20 +58,24 @@ const CustomSelect = ({ value, label, type, options }) => {
                         </Center>
                     </Box>
                     {options.map((option, index) => {
-                        <Box
-                            key={index}
-                            pl={2}
-                            py={1}
-                            borderBottomWidth={"1px"}
-                            display={"flex"}
-                            alignItems={"center"}
-                            gap={2}
-                            cursor={"pointer"}
-                            onClick={() => setShowSelect(false)}
-                        >
-                            <Checkbox colorScheme='purple' />
-                            <Text>{option}</Text>
-                        </Box>
+                        return (
+                            <Box
+                                key={index}
+                                pl={2}
+                                py={1}
+                                borderBottomWidth={"1px"}
+                                display={"flex"}
+                                alignItems={"center"}
+                                gap={2}
+                                cursor={"pointer"}
+                            >
+                                <Checkbox colorScheme='purple' />
+                                <Box onClick={() => setShowSelect(false)}>
+                                    <Text>{option}</Text>
+                                </Box>
+
+                            </Box>
+                        )
                     })}
                 </Box>
             }
