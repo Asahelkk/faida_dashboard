@@ -3,26 +3,26 @@
 import React, { useState } from "react";
 import { format, startOfWeek, endOfWeek, addDays, isSameMonth, parse, addMonths, subMonths, startOfMonth, endOfMonth, isSameDay } from 'date-fns';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-import { border } from "@chakra-ui/react";
 
-const Calendar = () => {
-    const [currentMonth, setCurrentMonth] = useState(new Date());
+
+const Calendar = ({ currentMonth, prevMonth, nextMonth, borderLeft, borderRight, borderRadiusRight }) => {
+    // const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState(new Date());
 
     const renderHeader = () => {
-        const dateFormat = "MMMM yyyy";
+        const dateFormat = "MMMM";
 
         return (
-            <div className="flex justify-between items-center py-2">
-                <div className="cursor-pointer" onClick={prevMonth}>
-                    <MdKeyboardArrowLeft className="text-xl" />
-                </div>
-                <div className="">
+            <div className="flex justify-between items-center pb-3">
+                <button className="cursor-pointer hover:bg-gray-100 p-2 rounded-md" onClick={prevMonth}>
+                    <MdKeyboardArrowLeft className="text-lg text-black" />
+                </button>
+                <div className="font-bold text-sm text-black">
                     <span>{format(currentMonth, dateFormat)}</span>
                 </div>
-                <div className="cursor-pointer" onClick={nextMonth}>
-                    <MdKeyboardArrowRight className="text-xl" />
-                </div>
+                <button className="cursor-pointer hover:bg-gray-100 p-2 rounded-md" onClick={nextMonth}>
+                    <MdKeyboardArrowRight className="text-lg text-black" />
+                </button>
             </div>
         );
     };
@@ -37,13 +37,13 @@ const Calendar = () => {
 
         for (let i = 0; i < 7; i++) {
             days.push(
-                <div className="" key={i}>
+                <div className="text-sm text-black" key={i}>
                     {format(addDays(startDate, i), dateFormat)}
                 </div>
             );
         }
 
-        return <div className="flex items-center gap-2 py-1">{days}</div>;
+        return <div className="flex items-center justify-between">{days}</div>;
     };
 
     const renderCells = () => {
@@ -65,20 +65,20 @@ const Calendar = () => {
                 const cloneDay = day;
                 days.push(
                     <div
-                        className={`border-r ${!isSameMonth(day, monthStart)
-                            ? "disabled"
-                            : isSameDay(day, selectedDate) ? "bg-primary_color text-white" : ""
+                        className={`py-1 px-2 ${!isSameMonth(day, monthStart)
+                            ? "text-gray-200"
+                            : isSameDay(day, selectedDate) ? "bg-primary_color text-white rounded-md" : ""
                             }`}
                         key={day}
                         onClick={() => onDateClick(parse(cloneDay))}
                     >
-                        <span className="">{formattedDate}</span>
+                        <span className="text-sm">{formattedDate}</span>
                     </div>
                 );
                 day = addDays(day, 1);
             }
             rows.push(
-                <div className="flex items-center gap-4 w-full border-b" key={day}>
+                <div className="flex items-center justify-between w-full" key={day}>
                     {days}
                 </div>
             );
@@ -91,16 +91,16 @@ const Calendar = () => {
         setSelectedDate(day);
     };
 
-    const nextMonth = () => {
-        setCurrentMonth(addMonths(currentMonth, 1));
-    };
+    // const nextMonth = () => {
+    //     setCurrentMonth(addMonths(currentMonth, 1));
+    // };
 
-    const prevMonth = () => {
-        setCurrentMonth(subMonths(currentMonth, 1));
-    };
+    // const prevMonth = () => {
+    //     setCurrentMonth(subMonths(currentMonth, 1));
+    // };
 
     return (
-        <div className="calendar">
+        <div className={`px-5 py-3 bg-white border-gray-200 ${borderLeft && `border-l`} ${borderRight && `border-r`} ${borderRadiusRight && `rounded-r-lg`}`}>
             {renderHeader()}
             {renderDays()}
             {renderCells()}

@@ -15,7 +15,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
             isOpen={isOpen}
             onClose={onClose}
             width={"w-3/4"}
-            top={"top-16"}
+            top={"top-8"}
         >
             <Box py={8} px={16} width={"full"}>
                 <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} mb={4}>

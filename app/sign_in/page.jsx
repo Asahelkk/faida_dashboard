@@ -17,7 +17,7 @@ const SignIn = () => {
   const toast = useToast();
   const setStorePhoneNumber = useUserPhoneNumberStore((state) => state.setStorePhoneNumber)
 
-  const [isSubmitting, setIsubmitting] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
 
   // Handle input validation
@@ -54,7 +54,7 @@ const SignIn = () => {
     // Verify validation before submitting
     if (!isValid) return;
 
-    setIsubmitting(true);
+    setSubmitting(true);
 
     const phone_number = "+255".concat(phoneNumber)
 
@@ -65,6 +65,7 @@ const SignIn = () => {
         alert(JSON.stringify(phone_number))
         router.push('/sign_in/verify_otp');
         resolve()
+        setSubmitting(false);
       }, 2000)
     })
   }

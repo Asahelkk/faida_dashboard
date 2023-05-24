@@ -18,7 +18,7 @@ const VerifyCode = () => {
     const removePhoneNumber = useUserPhoneNumberStore((state) => state.removePhoneNumber);
 
     const [passwordType, setPasswordType] = useState("password");
-    const [isSubmitting, setIsubmitting] = useState(false);
+    const [isSubmitting, setSubmitting] = useState(false);
     const [otp, setOtp] = useState("");
 
     // Handle input validation
@@ -46,15 +46,15 @@ const VerifyCode = () => {
         // Verify validation before submitting
         if (!isValid) return;
 
-        setIsubmitting(true);
-
-        removePhoneNumber();
+        setSubmitting(true);
 
         return new Promise((resolve) => {
             setTimeout(() => {
                 alert(JSON.stringify(otp))
                 router.push('/dashboard');
-                resolve()
+                resolve();
+                setSubmitting(false);
+                removePhoneNumber();
             }, 2000)
         })
     }

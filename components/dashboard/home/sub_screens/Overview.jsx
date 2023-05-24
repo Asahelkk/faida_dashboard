@@ -76,7 +76,7 @@ const Overview = () => {
                                 text={value.text}
                                 sub_text={value.sub_text}
                                 amount={value.text === "Total Merchants" ? numberWithCommas(Number(value.amount)) : `Tsh ${numberWithCommas(Number(value.amount))}`}
-                                icon={<AiFillSetting className='text-2xl p-1 border rounded-full cursor-pointer' />}
+                                icon={<AiFillSetting className='text-black text-2xl p-1 border rounded-full cursor-pointer' />}
                             />
                         ))}
                     </Box>
@@ -93,7 +93,7 @@ const Overview = () => {
                                 {/* Select */}
                                 <LayoutStrutureSelect currentSelect={"table"} />
                                 <Box>
-                                    <AiFillSetting className='text-3xl p-1 border rounded-full cursor-pointer' />
+                                    <AiFillSetting className='text-black text-3xl p-1 border rounded-full cursor-pointer' />
                                 </Box>
                             </Box>
                         </Box>
@@ -134,7 +134,7 @@ const Overview = () => {
                                 <Text fontSize={"sm"} textColor={"gray.400"}>18 Feb 2021 - 16 June 2021</Text>
                             </Box>
                             <Box>
-                                <AiFillSetting className='text-3xl p-1 border rounded-full cursor-pointer' />
+                                <AiFillSetting className='text-black text-3xl p-1 border rounded-full cursor-pointer' />
                             </Box>
                         </Box>
                         {/* Select */}
@@ -186,7 +186,7 @@ const Overview = () => {
                                 <Text fontSize={"sm"} textColor={"gray.400"}>18 Feb 2021 - 16 June 2021</Text>
                             </Box>
                             <Box cursor={"pointer"}>
-                                <AiFillSetting className='text-3xl p-1 border rounded-full cursor-pointer' />
+                                <AiFillSetting className='text-black text-3xl p-1 border rounded-full cursor-pointer' />
                             </Box>
                         </Box>
                         {/* Select */}
@@ -236,7 +236,7 @@ const Overview = () => {
                                 <Text fontSize={"sm"} textColor={"gray.400"}>18 Feb 2021 - 16 June 2021</Text>
                             </Box>
                             <Box cursor={"pointer"}>
-                                <AiFillSetting className='text-3xl p-1 border rounded-full cursor-pointer' />
+                                <AiFillSetting className='text-black text-3xl p-1 border rounded-full cursor-pointer' />
                             </Box>
                         </Box>
                         {/* Select */}
