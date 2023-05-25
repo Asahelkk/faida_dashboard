@@ -3,17 +3,20 @@
 import { Box, Center, Checkbox, HStack, Select, Text } from '@chakra-ui/react'
 import Table from '@components/general/table/Table'
 import TablePagination from '@components/general/table/TablePagination'
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { FiSearch } from "react-icons/fi"
 import Link from 'next/link'
 import CustomButton from '@components/general/CustomButton'
 import { useTable } from '@hooks/useTable'
+import UpdateUserModal from '@components/modals/UpdateUserModal'
 
 const AllUsers = () => {
 
     const [searchValue, setSearchValue] = useState("");
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(5);
+    const [current, setCurrent] = useState({});
+    const [openUpdateUser, setOpenUpdateUser] = useState(false);
 
     const { slice, pages, count } = useTable(user_list, page, perPage);
 
@@ -21,6 +24,14 @@ const AllUsers = () => {
         setPerPage(count);
         setPage(1);
     };
+
+    const handleOpenUpdateUser = useCallback(() => {
+        setOpenUpdateUser(true);
+    }, []);
+
+    const handleCloseUpdateUser = useCallback(() => {
+        setOpenUpdateUser(false);
+    }, []);
 
     return (
         <Box>
@@ -87,7 +98,8 @@ const AllUsers = () => {
                 {slice?.filter((user) => {
                     return (
                         user === "" ? user :
-                            user.name.toLowerCase().includes(searchValue.toLowerCase())
+                            user.firstname.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            user.lastname.toLowerCase().includes(searchValue.toLowerCase())
                     )
                 })?.map((data, index) => {
                     const status = STATUS_LIST[data?.isActive];
@@ -104,7 +116,7 @@ const AllUsers = () => {
                             <td className="py-3 px-4 text-sm text-center">
                                 <Checkbox colorScheme='purple' />
                             </td>
-                            <td className="py-3 px-4 text-sm">{data?.name}</td>
+                            <td className="py-3 px-4 text-sm">{`${data?.firstname} ${data?.lastname}`}</td>
                             <td className="py-3 px-4 text-sm">{data?.phone}</td>
                             <td className="py-3 px-4 text-sm">
                                 <div className='flex items-center gap-4'>
@@ -116,14 +128,26 @@ const AllUsers = () => {
                             </td>
                             {/* actions table */}
                             <td className="">
-                                <Link href={`/dashboard/user_accounts/${data?._id}`} className="flex justify-end">
-                                    <CustomButton type="button" variant={"solid"} text="View" width={"80px"} />
-                                </Link>
+                                <CustomButton
+                                    handleClick={() => {
+                                        setCurrent(data)
+                                        handleOpenUpdateUser()
+                                    }}
+                                    type="button"
+                                    variant={"solid"}
+                                    text="View"
+                                    width={"80px"}
+                                />
                             </td>
                         </tr>
                     )
                 })}
             </Table>
+            <UpdateUserModal
+                isOpen={openUpdateUser}
+                onClose={handleCloseUpdateUser}
+                current={current}
+            />
         </Box>
     )
 }
@@ -135,49 +159,57 @@ const options = [5, 10, 15, 20]
 const user_list = [
     {
         _id: 1,
-        name: "Joh Doe",
+        firstname: "John",
+        lastname: "Doe",
         phone: "+255742353791",
         isActive: false,
     },
     {
         _id: 2,
-        name: "Joh Doe",
+        firstname: "John",
+        lastname: "Doe",
         phone: "+255742353791",
         isActive: true,
     },
     {
         _id: 3,
-        name: "Joh Doe",
+        firstname: "John",
+        lastname: "Doe",
         phone: "+255742353791",
         isActive: false,
     },
     {
         _id: 4,
-        name: "Joh Doe",
+        firstname: "John",
+        lastname: "Doe",
         phone: "+255742353791",
         isActive: true,
     },
     {
         _id: 5,
-        name: "Joh Doe",
+        firstname: "John",
+        lastname: "Doe",
         phone: "+255742353791",
         isActive: false,
     },
     {
         _id: 6,
-        name: "Joh Doe",
+        firstname: "John",
+        lastname: "Doe",
         phone: "+255742353791",
         isActive: true,
     },
     {
         _id: 7,
-        name: "Joh Doe",
+        firstname: "John",
+        lastname: "Doe",
         phone: "+255742353791",
         isActive: false,
     },
     {
         _id: 8,
-        name: "Joh Doe",
+        firstname: "John",
+        lastname: "Doe",
         phone: "+255742353791",
         isActive: true,
     },

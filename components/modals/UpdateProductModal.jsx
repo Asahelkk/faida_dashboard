@@ -5,7 +5,7 @@ import CustomModal from '@components/general/CustomModal'
 import { Box, FormControl, FormLabel, HStack, Select, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 
-const AddProductModal = ({ isOpen, onClose }) => {
+const AddProductModal = ({ isOpen, onClose, current }) => {
 
     const [image, setImage] = useState("");
 
@@ -58,7 +58,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                         >
                             <Text textColor={"gray.400"} py={1}>Browser picture from your Computer</Text>
                             <input
-                            id="file"
+                                className="border-0 outline-none focus:outline-none h-8 flex-grow hidden"
                                 type="file"
                                 style={{ display: "none" }}
                                 onChange={(e) => setImage(e.target.files)}

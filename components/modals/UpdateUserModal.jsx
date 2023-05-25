@@ -3,11 +3,11 @@
 import CustomModal from '@components/general/CustomModal'
 import { Box, FormControl, FormLabel, HStack, Text, useToast } from '@chakra-ui/react';
 import CustomButton from '@components/general/CustomButton';
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { toastProps } from '@utils/toastHelper';
 import LoadingButton from '@components/general/LoadingButton';
 
-const AddUserModal = ({ isOpen, onClose }) => {
+const UpdateUserModal = ({ isOpen, onClose,current }) => {
 
     const toast = useToast();
 
@@ -18,6 +18,16 @@ const AddUserModal = ({ isOpen, onClose }) => {
         phoneNumber: "",
         accountStatus: false
     });
+
+    useEffect(() => {
+        setState((prev) => ({
+            ...prev,
+            firstname: current?.firstname,
+            lastname: current?.lastname,
+            phoneNumber: current?.phone,
+            accountStatus: current?.isActive
+        }));
+    }, [current]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -104,9 +114,9 @@ const AddUserModal = ({ isOpen, onClose }) => {
         >
             <Box py={16} px={20} width={"full"}>
                 <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} mb={4}>
-                    <Text fontSize={"2xl"} fontWeight={"semibold"}>Add User</Text>
+                    <Text fontSize={"2xl"} fontWeight={"semibold"}>Edit User</Text>
                     <HStack spacing={4}>
-                        {isSubmitting ? <LoadingButton width={"120px"} height={"40px"} /> : <CustomButton handleClick={handleSubmit} type="button" fontSize={"14px"} text={"Save User"} variant={"solid"} width={"120px"} height={"40px"} />}
+                        {isSubmitting ? <LoadingButton width={"120px"} height={"40px"} /> : <CustomButton handleClick={handleSubmit} type="button" fontSize={"14px"} text={"Edit"} variant={"outline"} width={"80px"} height={"40px"} />}
                     </HStack>
                 </Box>
                 <Box mt={10}>
@@ -126,6 +136,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
                                     className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                     type="text"
                                     name="firstname"
+                                    value={state.firstname}
                                     onChange={handleChange}
                                 />
                             </Box>
@@ -146,6 +157,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
                                     className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                     type="text"
                                     name="lastname"
+                                    value={state.lastname}
                                     onChange={handleChange}
                                 />
                             </Box>
@@ -166,6 +178,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
                                 className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                 type="text"
                                 name="phoneNumber"
+                                value={state.phoneNumber}
                                 onChange={handleChange}
                             />
                         </Box>
@@ -183,4 +196,4 @@ const AddUserModal = ({ isOpen, onClose }) => {
     )
 }
 
-export default AddUserModal
+export default UpdateUserModal
