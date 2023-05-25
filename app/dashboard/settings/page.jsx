@@ -23,12 +23,7 @@ const Settings = () => {
 
     }, []);
 
-    return (
-        <Box maxH={"91%"} overflowY={"scroll"} position={"relative"}>
-            <Box ref={mapRef} width={"100%"} maxH={"full"} />
-        </Box>
-
-    );
+    return <Box ref={mapRef} width={"100%"} maxH={"full"} />;
 }
 
 export default Settings
