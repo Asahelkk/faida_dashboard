@@ -14,7 +14,6 @@ import { RxTable } from "react-icons/rx"
 import Table from '@components/general/table/Table'
 import TablePagination from '@components/general/table/TablePagination'
 import { useTable } from '@hooks/useTable'
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 const Overview = () => {
 
@@ -194,26 +193,29 @@ const Overview = () => {
                             <LayoutStrutureSelect currentSelect={"chart"} />
                         </Box>
                         <Box mt={3} borderY={"1px"} borderColor={"gray.300"} width={"full"}>
-                            <Box mx={3} width={"full"}>
-                                <ResponsiveContainer width="100%" height="100%">
-                                    <BarChart
-                                        width={500}
-                                        height={300}
-                                        data={topStores}
-                                    // margin={{
-                                    //     top: 5,
-                                    //     right: 30,
-                                    //     left: 20,
-                                    //     bottom: 5,
-                                    // }}
-                                    >
-                                        <CartesianGrid strokeDasharray="3 3" />
-                                        <XAxis dataKey="name" />
-                                        <YAxis />
-                                        <Tooltip />
-                                        <Bar dataKey="revenue" fill="#8884d8" />
-                                    </BarChart>
-                                </ResponsiveContainer>
+                        <Box mx={3}>
+                                <table className="min-w-full mt-4">
+                                    <thead>
+                                        <tr className={"border-b"}>
+                                            <th className={"py-2 capitalize text-start font-semibold text-sm"}>
+                                                Name
+                                            </th>
+                                            <th className={"py-2 capitalize text-end font-semibold text-sm"}>
+                                                Revenue
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="font-normal text-md">
+                                        {topStores?.map((data, index) => {
+                                            return (
+                                                <tr key={index} className="border-b">
+                                                    <td className="py-3 text-start text-[14px]">{data?.name}</td>
+                                                    <td className="py-3 text-end text-[14px]">Tsh {numberWithCommas(Number(data?.revenue))}</td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
                             </Box>
                         </Box>
                         {topStores?.length === 4 ?
