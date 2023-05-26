@@ -190,7 +190,7 @@ const Overview = () => {
                         </Box>
                         {/* Select */}
                         <Box px={3} pt={4}>
-                            <LayoutStrutureSelect currentSelect={"chart"} />
+                            <LayoutStrutureSelect currentSelect={"table"} />
                         </Box>
                         <Box mt={3} borderY={"1px"} borderColor={"gray.300"} width={"full"}>
                         <Box mx={3}>
