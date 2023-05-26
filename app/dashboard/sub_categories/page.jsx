@@ -10,10 +10,13 @@ import { IoIosAdd } from "react-icons/io"
 import { useTable } from '@hooks/useTable'
 import { numberWithCommas } from '@utils/numberWithCommas';
 import AddSubCategoryModal from '@components/modals/AddSubCategoryModal';
+import UpdateSubCategoryModal from '@components/modals/UpdateSubCategoryModal';
 
 const SubCategories = () => {
     const [searchValue, setSearchValue] = useState("");
     const [openAddSubCategory, setOpenAddSubCategory] = useState(false);
+    const [openUpdateSubCategory, setOpenUpdateSubCategory] = useState(false);
+    const [current, setCurrent] = useState({});
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(5);
 
@@ -30,6 +33,13 @@ const SubCategories = () => {
 
     const handleCloseAddSubCategory = useCallback(() => {
         setOpenAddSubCategory(false)
+    }, []);
+    const handleOpenUpdateSubCategory = useCallback(() => {
+        setOpenUpdateSubCategory(true)
+    }, []);
+
+    const handleCloseUpdateSubCategory = useCallback(() => {
+        setOpenUpdateSubCategory(false)
     }, []);
 
     return (
@@ -95,7 +105,7 @@ const SubCategories = () => {
                     </Box>
                 </Box>
                 <Table
-                    headers={["select", "subcategory name", "total categories", "total products"]}
+                    headers={["select", "subcategory name", "total products"]}
                     footer={
                         <TablePagination
                             pages={pages}
@@ -117,11 +127,19 @@ const SubCategories = () => {
                                     <Checkbox colorScheme='purple' />
                                 </td>
                                 <td className="py-3 px-4 text-sm">{data?.sub_category_name}</td>
-                                <td className="py-3 px-4 text-sm">{numberWithCommas(Number(data?.sub_category_count))}</td>
                                 <td className="py-3 px-4 text-sm">{numberWithCommas(Number(data?.products_count))}</td>
                                 {/* actions table */}
                                 <td className="">
-                                    <CustomButton type="button" variant={"solid"} text="View" width={"80px"} />
+                                    <CustomButton
+                                        handleClick={() => {
+                                            setCurrent(data);
+                                            handleOpenUpdateSubCategory();
+                                        }}
+                                        type="button"
+                                        variant={"solid"}
+                                        text="View"
+                                        width={"80px"}
+                                    />
                                 </td>
                             </tr>
                         )
@@ -131,6 +149,12 @@ const SubCategories = () => {
             <AddSubCategoryModal
                 isOpen={openAddSubCategory}
                 onClose={handleCloseAddSubCategory}
+            />
+
+            <UpdateSubCategoryModal
+                isOpen={openUpdateSubCategory}
+                onClose={handleCloseUpdateSubCategory}
+                current={current}
             />
         </Box>
     )
@@ -143,42 +167,42 @@ const options = [5, 10, 15, 20];
 const sub_category_list = [
     {
         sub_category_name: "fittings",
-        sub_category_count: "234",
+        category: "furniture",
         products_count: "1200"
     },
     {
         sub_category_name: "fittings",
-        sub_category_count: "234",
+        category: "furniture",
         products_count: "1200"
     },
     {
         sub_category_name: "fittings",
-        sub_category_count: "234",
+        category: "furniture",
         products_count: "1200"
     },
     {
         sub_category_name: "fittings",
-        sub_category_count: "234",
+        category: "furniture",
         products_count: "1200"
     },
     {
         sub_category_name: "fittings",
-        sub_category_count: "234",
+        category: "furniture",
         products_count: "1200"
     },
     {
         sub_category_name: "fittings",
-        sub_category_count: "234",
+        category: "furniture",
         products_count: "1200"
     },
     {
         sub_category_name: "fittings",
-        sub_category_count: "234",
+        category: "furniture",
         products_count: "1200"
     },
     {
         sub_category_name: "fittings",
-        sub_category_count: "234",
+        category: "furniture",
         products_count: "1200"
     },
 ]

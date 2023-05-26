@@ -2,11 +2,14 @@
 
 import CustomButton from '@components/general/CustomButton'
 import CustomModal from '@components/general/CustomModal'
-import { Box, FormControl, FormLabel, HStack, Select, Text } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, HStack, Select, Text, useToast } from '@chakra-ui/react';
 import { useState } from 'react';
 import LoadingButton from '@components/general/LoadingButton';
+import { toastProps } from '@utils/toastHelper';
 
 const AddProductModal = ({ isOpen, onClose }) => {
+
+    const toast = useToast(); 
 
     const [image, setImage] = useState("");
     const [isSubmitting, setSubmitting] = useState(false);
@@ -131,7 +134,7 @@ const AddProductModal = ({ isOpen, onClose }) => {
                 <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} mb={4}>
                     <Text fontSize={"2xl"} fontWeight={"normal"}>Product Information</Text>
                     <HStack spacing={4}>
-                        {isSubmitting ? <LoadingButton /> : <CustomButton handleClick={handleSubmit} type="button" fontSize={"14px"} text={"Save"} variant={"solid"} width={"80px"} height={"40px"} />}
+                        {isSubmitting ? <LoadingButton width={"120px"} height={"40px"} /> : <CustomButton handleClick={handleSubmit} type="button" fontSize={"14px"} text={"Save"} variant={"solid"} width={"80px"} height={"40px"} />}
                     </HStack>
                 </Box>
                 <Box mt={10}>

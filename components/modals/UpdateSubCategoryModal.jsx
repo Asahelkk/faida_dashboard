@@ -4,11 +4,11 @@ import CustomButton from '@components/general/CustomButton'
 import CustomModal from '@components/general/CustomModal'
 import { Box, FormControl, FormLabel, Text, Select, useToast } from '@chakra-ui/react';
 import { toastProps } from '@utils/toastHelper';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LoadingButton from '@components/general/LoadingButton';
 
 
-const AddSubCategoryModal = ({ isOpen, onClose }) => {
+const UpdateSubCategoryModal = ({ isOpen, onClose, current }) => {
 
     const toast = useToast();
 
@@ -17,6 +17,14 @@ const AddSubCategoryModal = ({ isOpen, onClose }) => {
         sub_category_name: "",
         category: "",
     });
+
+    useEffect(() => {
+        setState((prev) => ({
+            ...prev,
+            sub_category_name: current.sub_category_name,
+            category: current.category
+        }))
+    }, [current]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -77,8 +85,8 @@ const AddSubCategoryModal = ({ isOpen, onClose }) => {
         >
             <Box py={16} px={20} width={"full"}>
                 <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"} mb={4}>
-                    <Text fontSize={"2xl"} fontWeight={"semibold"}>Add SubCategory</Text>
-                    {isSubmitting ? <LoadingButton width={"120px"} height={"40px"} /> : <CustomButton handleClick={handleSubmit} type="button" fontSize={"14px"} text={"Save"} variant={"solid"} width={"120px"} height={"40px"} />}
+                    <Text fontSize={"2xl"} fontWeight={"semibold"}>Update SubCategory</Text>
+                    {isSubmitting ? <LoadingButton width={"120px"} height={"40px"} /> : <CustomButton handleClick={handleSubmit} type="button" fontSize={"14px"} text={"Edit"} variant={"outline"} width={"80px"} height={"40px"} />}
                 </Box>
                 <Box mt={10}>
                     <FormControl my={4}>
@@ -96,6 +104,7 @@ const AddSubCategoryModal = ({ isOpen, onClose }) => {
                                 className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                 type="text"
                                 name="sub_category_name"
+                                value={state.sub_category_name}
                                 onChange={handleChange}
                             />
                         </Box>
@@ -115,7 +124,7 @@ const AddSubCategoryModal = ({ isOpen, onClose }) => {
                             name="category"
                             onChange={handleChange}
                         >
-                            <option>Select Category</option>
+                            <option value={state.category}>{state.category}</option>
                         </Select>
                     </FormControl>
                 </Box>
@@ -126,4 +135,4 @@ const AddSubCategoryModal = ({ isOpen, onClose }) => {
     )
 }
 
-export default AddSubCategoryModal
+export default UpdateSubCategoryModal

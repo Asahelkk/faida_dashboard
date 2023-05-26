@@ -4,15 +4,19 @@ import CustomButton from '@components/general/CustomButton'
 import CustomModal from '@components/general/CustomModal'
 import { Box, FormControl, Text, useToast } from '@chakra-ui/react';
 import { toastProps } from '@utils/toastHelper';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LoadingButton from '@components/general/LoadingButton';
 
-const AddCategoryModal = ({ isOpen, onClose }) => {
+const UpdateCategoryModal = ({ isOpen, onClose, current }) => {
 
     const toast = useToast();
 
     const [isSubmitting, setSubmitting] = useState(false);
     const [category, setCategory] = useState("");
+
+    useEffect(() => {
+        setCategory(current)
+    }, [current]);
 
     const handleValidation = () => {
         if (category === "") {
@@ -57,8 +61,8 @@ const AddCategoryModal = ({ isOpen, onClose }) => {
         >
             <Box py={16} px={24} width={"full"}>
                 <Box display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
-                    <Text fontSize={"2xl"} fontWeight={"semibold"}>Add Category</Text>
-                    {isSubmitting ? <LoadingButton width={"120px"} height={"40px"} /> : <CustomButton handleClick={handleSubmit} type="button" fontSize={"14px"} text={"Save"} variant={"solid"} width={"80px"} height={"40px"} />}
+                    <Text fontSize={"2xl"} fontWeight={"semibold"}>Update Category</Text>
+                    {isSubmitting ? <LoadingButton width={"120px"} height={"40px"} /> : <CustomButton handleClick={handleSubmit} type="button" fontSize={"14px"} text={"Edit"} variant={"outline"} width={"80px"} height={"40px"} />}
                 </Box>
                 <Box my={14}>
                     <FormControl>
@@ -75,6 +79,7 @@ const AddCategoryModal = ({ isOpen, onClose }) => {
                                 className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                 type="text"
                                 name="category"
+                                value={category}
                                 onChange={(e) => setCategory(e.target.value)}
                             />
                         </Box>
@@ -86,4 +91,4 @@ const AddCategoryModal = ({ isOpen, onClose }) => {
     )
 }
 
-export default AddCategoryModal
+export default UpdateCategoryModal

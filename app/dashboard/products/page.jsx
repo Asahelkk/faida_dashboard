@@ -10,10 +10,13 @@ import { IoIosAdd } from "react-icons/io"
 import { useTable } from '@hooks/useTable'
 import Image from 'next/image';
 import AddProductModal from '@components/modals/AddProductModal';
+import UpdateProductModal from '@components/modals/UpdateProductModal';
 
 const Products = () => {
     const [searchValue, setSearchValue] = useState("");
     const [openAddProduct, setOpenAddProduct] = useState(false);
+    const [openUpdateProduct, setOpenUpdateProduct] = useState(false);
+    const [current, setCurrent] = useState({});
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(5);
 
@@ -30,6 +33,14 @@ const Products = () => {
 
     const handleCloseAddProduct = useCallback(() => {
         setOpenAddProduct(false)
+    }, []);
+
+    const handleOpenUpdateProduct = useCallback(() => {
+        setOpenUpdateProduct(true)
+    }, []);
+
+    const handleCloseUpdateProduct = useCallback(() => {
+        setOpenUpdateProduct(false)
     }, []);
 
     return (
@@ -132,7 +143,16 @@ const Products = () => {
                                 <td className="py-3 px-4 text-sm">{data?.sub_category}</td>
                                 {/* actions table */}
                                 <td className="">
-                                    <CustomButton type="button" variant={"solid"} text="Edit" width={"80px"} />
+                                    <CustomButton
+                                        handleClick={() => {
+                                            setCurrent(data);
+                                            handleOpenUpdateProduct();
+                                        }}
+                                        type="button"
+                                        variant={"solid"}
+                                        text="Edit"
+                                        width={"80px"}
+                                    />
                                 </td>
                             </tr>
                         )
@@ -142,6 +162,12 @@ const Products = () => {
             <AddProductModal
                 isOpen={openAddProduct}
                 onClose={handleCloseAddProduct}
+            />
+
+            <UpdateProductModal
+                isOpen={openUpdateProduct}
+                onClose={handleCloseUpdateProduct}
+                current={current}
             />
         </Box>
     )

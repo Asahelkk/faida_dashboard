@@ -2,12 +2,15 @@
 
 import CustomButton from '@components/general/CustomButton'
 import CustomModal from '@components/general/CustomModal'
-import { Box, FormControl, FormLabel, HStack, Select, Text } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, HStack, Select, Text, useToast } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import LoadingButton from '@components/general/LoadingButton';
+import { toastProps } from '@utils/toastHelper';
 
-const AddProductModal = ({ isOpen, onClose, current }) => {
+const UpdateProductModal = ({ isOpen, onClose, current }) => {
 
+    const toast = useToast();
+    
     const [image, setImage] = useState("");
     const [isSubmitting, setSubmitting] = useState(false);
     const [state, setState] = useState({
@@ -246,10 +249,9 @@ const AddProductModal = ({ isOpen, onClose, current }) => {
                                 gap="xs"
                                 bg="white"
                                 name="category"
-                                value={state.category}
                                 onChange={handleChange}
                             >
-                                <option>Select category</option>
+                                <option value={state.category}>{state.category}</option>
                             </Select>
                         </FormControl>
 
@@ -266,10 +268,9 @@ const AddProductModal = ({ isOpen, onClose, current }) => {
                                 gap="xs"
                                 bg="white"
                                 name="sub_category"
-                                value={state.sub_category}
                                 onChange={handleChange}
                             >
-                                <option>Select Subcategory</option>
+                                <option value={state.sub_category}>{state.sub_category}</option>
                             </Select>
                         </FormControl>
                     </HStack>
@@ -280,4 +281,4 @@ const AddProductModal = ({ isOpen, onClose, current }) => {
     )
 }
 
-export default AddProductModal
+export default UpdateProductModal

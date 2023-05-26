@@ -10,10 +10,13 @@ import { IoIosAdd } from "react-icons/io"
 import { useTable } from '@hooks/useTable'
 import { numberWithCommas } from '@utils/numberWithCommas';
 import AddCategoryModal from '@components/modals/AddCategoryModal';
+import UpdateCategoryModal from '@components/modals/UpdateCategoryModal';
 
 const Categories = () => {
     const [searchValue, setSearchValue] = useState("");
-    const [openAddCategory, setOpenCategory] = useState(false);
+    const [openAddCategory, setOpenAddCategory] = useState(false);
+    const [openUpdateCategory, setOpenUpdateCategory] = useState(false);
+    const [current, setCurrent] = useState("");
     const [page, setPage] = useState(1);
     const [perPage, setPerPage] = useState(5);
 
@@ -25,11 +28,19 @@ const Categories = () => {
     };
 
     const handleOpenAddCategory = useCallback(() => {
-        setOpenCategory(true)
+        setOpenAddCategory(true)
     }, []);
 
     const handleCloseAddCategory = useCallback(() => {
-        setOpenCategory(false)
+        setOpenAddCategory(false)
+    }, []);
+
+    const handleOpenUpdateCategory = useCallback(() => {
+        setOpenUpdateCategory(true)
+    }, []);
+
+    const handleCloseUpdateCategory = useCallback(() => {
+        setOpenUpdateCategory(false)
     }, []);
 
     return (
@@ -95,7 +106,7 @@ const Categories = () => {
                     </Box>
                 </Box>
                 <Table
-                    headers={["select", "category name", "total categories", "total products"]}
+                    headers={["select", "category name", "total sub categories", "total products"]}
                     footer={
                         <TablePagination
                             pages={pages}
@@ -121,7 +132,16 @@ const Categories = () => {
                                 <td className="py-3 px-4 text-sm">{numberWithCommas(Number(data?.products_count))}</td>
                                 {/* actions table */}
                                 <td className="">
-                                    <CustomButton type="button" variant={"solid"} text="View" width={"80px"} />
+                                    <CustomButton
+                                        handleClick={() => {
+                                            setCurrent(data?.category_name);
+                                            handleOpenUpdateCategory()
+                                        }}
+                                        type="button"
+                                        variant={"solid"}
+                                        text="View"
+                                        width={"80px"}
+                                    />
                                 </td>
                             </tr>
                         )
@@ -131,6 +151,11 @@ const Categories = () => {
             <AddCategoryModal
                 isOpen={openAddCategory}
                 onClose={handleCloseAddCategory}
+            />
+            <UpdateCategoryModal
+                isOpen={openUpdateCategory}
+                onClose={handleCloseUpdateCategory}
+                current={current}
             />
         </Box>
     )
