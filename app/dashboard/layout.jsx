@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 import React, { useState } from "react";
 import SideNav from "@components/dashboard/SideNav"
 import TopNav from "@components/dashboard/TopNav";
-import AuthCheck from "@middleware/AuthCheck";
+// import AuthCheck from "@middleware/AuthCheck";
 
 const Layout = ({ children }) => {
   const [showSideBar, setShowSideBar] = useState(true);
@@ -14,7 +14,6 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <AuthCheck>
       <Box display={"flex"} flexDirection={"row"} bg={"#F4F4F4"} className={"h-screen"}>
         <SideNav show={showSideBar} />
 
@@ -23,8 +22,6 @@ const Layout = ({ children }) => {
           {children}
         </Box>
       </Box>
-    </AuthCheck>
-
   );
 }
 
