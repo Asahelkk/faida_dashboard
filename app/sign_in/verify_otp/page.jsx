@@ -66,7 +66,15 @@ const VerifyCode = () => {
             setSubmitting(false);
             router.push('/dashboard');
             removePhoneNumber();
-        })
+        }).catch((error) => {
+            toast({
+              ...toastProps,
+              title: "Error!",
+              description: error,
+              status: "error",
+            });
+            setSubmitting(false);
+          })
     }
 
     return (

@@ -7,13 +7,10 @@ import { useState } from "react"
 import { toastProps } from '@utils/toastHelper';
 import LoadingButton from '@components/general/LoadingButton';
 import UserServices from '@utils/services/UserServices';
-import { usePathname, useRouter } from 'next/navigation';
 
 const AddUserModal = ({ isOpen, onClose }) => {
 
     const toast = useToast();
-    const router = useRouter();
-    const pathname = usePathname();
 
     const [isSubmitting, setSubmitting] = useState(false);
     const [state, setState] = useState({
@@ -106,15 +103,13 @@ const AddUserModal = ({ isOpen, onClose }) => {
             });
             setSubmitting(false);
             onClose();
-            if (typeof window !== 'undefined') {
-                window.location.reload();
-              }
+            window.location.reload();
         }).catch((error) => {
             toast({
                 ...toastProps,
-                title: "Success",
-                description: error?.response?.data?.message,
-                status: "success",
+                title: "Error!",
+                description: error,
+                status: "error",
             });
             setSubmitting(false);
         })

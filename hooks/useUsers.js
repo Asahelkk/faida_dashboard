@@ -16,12 +16,12 @@ export const useUsers = () => {
                 setUsers(response);
             }).catch((error) => {
                 toast({
-                    ...toastProps,
-                    title: "Success",
-                    description: error?.response?.data?.message,
-                    status: "success",
+                  ...toastProps,
+                  title: "Error!",
+                  description: error,
+                  status: "error",
                 });
-            })
+              })
         }
         fetchAllUsers();
     }, [toast]);
