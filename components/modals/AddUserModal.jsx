@@ -106,7 +106,9 @@ const AddUserModal = ({ isOpen, onClose }) => {
             });
             setSubmitting(false);
             onClose();
-            window.location.reload();
+            if (typeof window !== 'undefined') {
+                window.location.reload();
+              }
         }).catch((error) => {
             toast({
                 ...toastProps,
