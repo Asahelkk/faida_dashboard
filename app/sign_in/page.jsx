@@ -97,7 +97,7 @@ const SignIn = () => {
             label="Phone Number"
             name="mobileNumber"
             placeholder='742000797'
-            option={<CountryCodeSelect currentSelect={"tz"} handleCurrent={handleCurrent} current={current} />}
+            option={<CountryCodeSelect handleCurrent={handleCurrent} current={current} />}
             width="full"
             handleChange={(e) => setMobileNumber(e.target.value)}
           />

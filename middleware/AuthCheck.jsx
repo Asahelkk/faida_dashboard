@@ -10,7 +10,7 @@ const AuthCheck = ({ children }) => {
 
     if (!user?.token) {
         router.push('/sign_in');
-        return null;
+        return;
     }
 
     return <>{children}</>;
