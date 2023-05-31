@@ -79,8 +79,8 @@ const SignIn = () => {
       .catch((error) => {
         toast({
           ...toastProps,
-          title: "Error!",
-          description: error,
+          title: "Error",
+          description: error?.response?.data?.message,
           status: "error",
         });
         setSubmitting(false);
