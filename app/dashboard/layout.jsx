@@ -14,7 +14,6 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <AuthCheck>
       <Box display={"flex"} flexDirection={"row"} bg={"#F4F4F4"} className={"h-screen"}>
         <SideNav show={showSideBar} />
 
@@ -23,8 +22,6 @@ const Layout = ({ children }) => {
           {children}
         </Box>
       </Box>
-    </AuthCheck>
-
   );
 }
 
