@@ -145,7 +145,7 @@ const CountryCodeSelect = (
         </Box>
       </Box>
       {showSelect &&
-        <Box bg={"gray.50"} width={"fit-content"} className="absolute bottom-[160px]">
+        <Box bg={"gray.50"} width={"fit-content"} className="absolute bottom-[4px]">
           <Box
             className={"flex items-center gap-2 hover:bg-gray-200 p-1 cursor-pointer"}
             onClick={() => {
