@@ -1,4 +1,4 @@
-import { Center, HStack, Text, Box, VStack } from "@chakra-ui/react"
+import { Center, HStack, Text, Box, VStack, useToast } from "@chakra-ui/react"
 import { FiLogOut } from "react-icons/fi"
 import { MdDashboard } from "react-icons/md"
 import { IoSettingsOutline, IoArchiveOutline } from "react-icons/io5"
@@ -8,12 +8,29 @@ import { FaRegUser } from "react-icons/fa"
 import Image from 'next/image';
 import Link from "next/link"
 import { useState } from "react";
+import { useUserStore } from "@utils/zustand/Store"
+import { toastProps } from "@utils/toastHelper"
 
 const SideNav = ({ show }) => {
+
+    const toast = useToast();
     const [current, setCurrent] = useState("dashboard");
+
+    const removeUser = useUserStore((state) => state.removeUser);
 
     const handleCurrent = (selected) => {
         setCurrent(selected.toLowerCase())
+    }
+
+    const handleLogout = () => {
+        removeUser();
+        toast({
+            ...toastProps,
+            title: "Success",
+            description: "Logged out successfully!",
+            status: "success",
+        });
+      
     }
 
     return (
@@ -56,7 +73,7 @@ const SideNav = ({ show }) => {
                     borderRadius={"md"}
                     className={"hover:scale-95"}
                     w={"full"}
-                    onClick={() => { }}
+                    onClick={handleLogout}
                     _hover={{ bg: "#8E7CFB" }}
                     _focus={{ bg: "#8E7CFB" }}
                 >

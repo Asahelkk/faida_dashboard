@@ -13,6 +13,7 @@ const CustomInput = ({
     label,
     name,
     icon,
+    option,
     text,
     width,
     handleEyeClick,
@@ -31,8 +32,9 @@ const CustomInput = ({
         >
             <label className="text-sm text-gray-600">{label}</label>
             <Box display={"flex"} alignItems={"center"} gap={3}>
-                {icon}
-                <span className="text-secondary_color font-semibold">{text}</span>
+                {/* {icon}
+                <span className="text-secondary_color font-semibold">{text}</span> */}
+                {option}
                 <input
                     placeholder={placeholder}
                     className="border-0 outline-none focus:outline-none h-8 flex-grow"

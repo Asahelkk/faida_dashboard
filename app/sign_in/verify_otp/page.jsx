@@ -8,7 +8,8 @@ import { FormControl } from '@chakra-ui/react'
 import LoadingButton from '@components/general/LoadingButton'
 import { useRouter } from 'next/navigation'
 import { toastProps } from '@utils/toastHelper'
-import { useUserPhoneNumberStore } from '@utils/zustand/Store';
+import { useUserPhoneNumberStore, useUserStore } from '@utils/zustand/Store';
+import AuthServices from '@utils/services/AuthServices';
 
 const VerifyCode = () => {
 
@@ -16,6 +17,7 @@ const VerifyCode = () => {
     const toast = useToast();
     const user = useUserPhoneNumberStore((state) => state.user);
     const removePhoneNumber = useUserPhoneNumberStore((state) => state.removePhoneNumber);
+    const setUser = useUserStore((state) => state.setUser);
 
     const [passwordType, setPasswordType] = useState("password");
     const [isSubmitting, setSubmitting] = useState(false);
@@ -38,7 +40,7 @@ const VerifyCode = () => {
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const isValid = handleValidation();
@@ -48,14 +50,22 @@ const VerifyCode = () => {
 
         setSubmitting(true);
 
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                alert(JSON.stringify(otp))
-                router.push('/dashboard');
-                resolve();
-                setSubmitting(false);
-                removePhoneNumber();
-            }, 2000)
+        const data = {
+            phoneNumber: user.phoneNumber,
+            otp: otp,
+        }
+
+        await AuthServices.verifyAccount(data).then((response) => {
+            toast({
+                ...toastProps,
+                title: "Success",
+                description: "You have logged in successful",
+                status: "success",
+            });
+            setUser(response);
+            setSubmitting(false);
+            router.push('/dashboard');
+            removePhoneNumber();
         })
     }
 

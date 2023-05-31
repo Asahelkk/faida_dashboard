@@ -6,8 +6,12 @@ import React from "react";
 import { HiBars3 } from "react-icons/hi2";
 import { BsBell } from "react-icons/bs";
 import {AiFillCaretDown} from "react-icons/ai"
+import { useUserStore } from "@utils/zustand/Store";
 
 const TopNav = ({ toggleSideBar }) => {
+    
+    const user = useUserStore((state) => state.user);
+
     return (
         <HStack h={"60px"} bg={"white"} justifyContent={"space-between"} className="shadow-md">
             <button
@@ -33,7 +37,7 @@ const TopNav = ({ toggleSideBar }) => {
                     <Box display={"flex"} alignItems={"center"} gap={3} py={1}>
                         <Image src="/assets/images/Faida_App_Logo-003.png" alt="Profile" width={45} height={45} className="rounded-full" />
                         <Box display={"flex"} flexDirection={"column"} gap={1}>
-                            <Text textColor={"black"}>Hi, <Text as="span" className="text-primary_color font-semibold">Asahel</Text></Text>
+                            <Text textColor={"black"}>Hi, <Text as="span" className="text-primary_color font-semibold">{user?.userName}</Text></Text>
                             <Text textColor={"gray.500"} fontSize={"sm"}>adminuser@gmail.com</Text>
                         </Box>
                     </Box>

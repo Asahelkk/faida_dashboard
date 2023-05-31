@@ -5,10 +5,10 @@ import Table from '@components/general/table/Table'
 import TablePagination from '@components/general/table/TablePagination'
 import React, { useState, useCallback } from 'react'
 import { FiSearch } from "react-icons/fi"
-import Link from 'next/link'
 import CustomButton from '@components/general/CustomButton'
 import { useTable } from '@hooks/useTable'
 import UpdateUserModal from '@components/modals/UpdateUserModal'
+import { useUsers } from '@hooks/useUsers'
 
 const AllUsers = () => {
 
@@ -18,7 +18,9 @@ const AllUsers = () => {
     const [current, setCurrent] = useState({});
     const [openUpdateUser, setOpenUpdateUser] = useState(false);
 
-    const { slice, pages, count } = useTable(user_list, page, perPage);
+    const users = useUsers();
+
+    const { slice, pages, count } = useTable(users, page, perPage);
 
     const updatePerPage = (count) => {
         setPerPage(count);
@@ -98,17 +100,17 @@ const AllUsers = () => {
                 {slice?.filter((user) => {
                     return (
                         user === "" ? user :
-                            user.firstname.toLowerCase().includes(searchValue.toLowerCase()) ||
-                            user.lastname.toLowerCase().includes(searchValue.toLowerCase())
+                            user.firstName.toLowerCase().includes(searchValue.toLowerCase()) ||
+                            user.lastName.toLowerCase().includes(searchValue.toLowerCase())
                     )
                 })?.map((data, index) => {
-                    const status = STATUS_LIST[data?.isActive];
+                    const status = STATUS_LIST[data?.accountStatus];
                     const textaColor =
-                        data?.isActive
+                        data?.accountStatus
                             ? "text-primary_green"
                             : "text-primary_red";
                     const bg =
-                        data?.isActive
+                        data?.accountStatus
                             ? "bg-gray-300"
                             : "bg-primary_red";
                     return (
@@ -116,8 +118,8 @@ const AllUsers = () => {
                             <td className="py-3 px-4 text-sm text-center">
                                 <Checkbox colorScheme='purple' />
                             </td>
-                            <td className="py-3 px-4 text-sm">{`${data?.firstname} ${data?.lastname}`}</td>
-                            <td className="py-3 px-4 text-sm">{data?.phone}</td>
+                            <td className="py-3 px-4 text-sm">{`${data?.firstName} ${data?.lastName}`}</td>
+                            <td className="py-3 px-4 text-sm">{data?.phoneNumber}</td>
                             <td className="py-3 px-4 text-sm">
                                 <div className='flex items-center gap-4'>
                                     <div className={`h-3 w-3 rounded-full ${bg}`} />
@@ -156,64 +158,6 @@ export default AllUsers
 
 const options = [5, 10, 15, 20]
 
-const user_list = [
-    {
-        _id: 1,
-        firstname: "John",
-        lastname: "Doe",
-        phone: "+255742353791",
-        isActive: false,
-    },
-    {
-        _id: 2,
-        firstname: "John",
-        lastname: "Doe",
-        phone: "+255742353791",
-        isActive: true,
-    },
-    {
-        _id: 3,
-        firstname: "John",
-        lastname: "Doe",
-        phone: "+255742353791",
-        isActive: false,
-    },
-    {
-        _id: 4,
-        firstname: "John",
-        lastname: "Doe",
-        phone: "+255742353791",
-        isActive: true,
-    },
-    {
-        _id: 5,
-        firstname: "John",
-        lastname: "Doe",
-        phone: "+255742353791",
-        isActive: false,
-    },
-    {
-        _id: 6,
-        firstname: "John",
-        lastname: "Doe",
-        phone: "+255742353791",
-        isActive: true,
-    },
-    {
-        _id: 7,
-        firstname: "John",
-        lastname: "Doe",
-        phone: "+255742353791",
-        isActive: false,
-    },
-    {
-        _id: 8,
-        firstname: "John",
-        lastname: "Doe",
-        phone: "+255742353791",
-        isActive: true,
-    },
-]
 
 const STATUS_LIST = {
     true: "Active",

@@ -23,11 +23,40 @@ export const useUserPhoneNumberStore = create(
                         }
                     })),
             }),
-            { name: "user" }
+            { name: "user_phoneNumber" }
         )
     )
 );
 
+export const useUserStore = create(
+    devtools(
+        persist(
+            (set) => ({
+                user: {
+                    token: null,
+                    userName: null
+                },
+                setUser: (response) =>
+                    set((state) => ({
+                        user: {
+                            ...state.user,
+                            token: response.token,
+                            userName: response.user
+                        }
+                    })),
+                removeUser: () =>
+                    set((state) => ({
+                        user: {
+                            ...state.user,
+                            token: null,
+                            userName: null
+                        }
+                    })),
+            }),
+            { name: "user" }
+        )
+    )
+);
 
 
 

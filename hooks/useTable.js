@@ -22,7 +22,7 @@ const sliceData = (
     page,
     rowsPerPage
 ) => {
-    if (data) return data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
+    if (data) return data?.slice((page - 1) * rowsPerPage, page * rowsPerPage);
     else return undefined;
 };
 

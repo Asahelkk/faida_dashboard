@@ -13,8 +13,8 @@ const UpdateUserModal = ({ isOpen, onClose,current }) => {
 
     const [isSubmitting, setSubmitting] = useState(false);
     const [state, setState] = useState({
-        firstname: "",
-        lastname: "",
+        firstName: "",
+        lastName: "",
         phoneNumber: "",
         accountStatus: false
     });
@@ -22,9 +22,9 @@ const UpdateUserModal = ({ isOpen, onClose,current }) => {
     useEffect(() => {
         setState((prev) => ({
             ...prev,
-            firstname: current?.firstname,
-            lastname: current?.lastname,
-            phoneNumber: current?.phone,
+            firstName: current?.firstName,
+            lastName: current?.lastName,
+            phoneNumber: current?.phoneNumber,
             accountStatus: current?.isActive
         }));
     }, [current]);
@@ -51,7 +51,7 @@ const UpdateUserModal = ({ isOpen, onClose,current }) => {
 
 
     const handleValidation = () => {
-        if (state.firstname === "") {
+        if (state.firstName === "") {
             toast({
                 ...toastProps,
                 title: "Error!",
@@ -61,7 +61,7 @@ const UpdateUserModal = ({ isOpen, onClose,current }) => {
 
             return false;
         }
-        else if (state.lastname === "") {
+        else if (state.lastName === "") {
             toast({
                 ...toastProps,
                 title: "Error!",
@@ -135,8 +135,8 @@ const UpdateUserModal = ({ isOpen, onClose,current }) => {
                                     placeholder="type here"
                                     className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                     type="text"
-                                    name="firstname"
-                                    value={state.firstname}
+                                    name="firstName"
+                                    value={state.firstName}
                                     onChange={handleChange}
                                 />
                             </Box>
@@ -156,8 +156,8 @@ const UpdateUserModal = ({ isOpen, onClose,current }) => {
                                     placeholder="type here"
                                     className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                     type="text"
-                                    name="lastname"
-                                    value={state.lastname}
+                                    name="lastName"
+                                    value={state.lastName}
                                     onChange={handleChange}
                                 />
                             </Box>

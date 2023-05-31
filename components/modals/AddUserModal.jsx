@@ -6,6 +6,7 @@ import CustomButton from '@components/general/CustomButton';
 import { useState } from "react"
 import { toastProps } from '@utils/toastHelper';
 import LoadingButton from '@components/general/LoadingButton';
+import UserServices from '@utils/services/UserServices';
 
 const AddUserModal = ({ isOpen, onClose }) => {
 
@@ -13,8 +14,8 @@ const AddUserModal = ({ isOpen, onClose }) => {
 
     const [isSubmitting, setSubmitting] = useState(false);
     const [state, setState] = useState({
-        firstname: "",
-        lastname: "",
+        firstName: "",
+        lastName: "",
         phoneNumber: "",
         accountStatus: false
     });
@@ -41,7 +42,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
 
 
     const handleValidation = () => {
-        if (state.firstname === "") {
+        if (state.firstName === "") {
             toast({
                 ...toastProps,
                 title: "Error!",
@@ -51,7 +52,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
 
             return false;
         }
-        else if (state.lastname === "") {
+        else if (state.lastName === "") {
             toast({
                 ...toastProps,
                 title: "Error!",
@@ -76,7 +77,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
     }
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const isValid = handleValidation();
@@ -86,13 +87,31 @@ const AddUserModal = ({ isOpen, onClose }) => {
 
         setSubmitting(true);
 
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                alert(JSON.stringify(state))
-                resolve();
-                setSubmitting(false);
-                onClose();
-            }, 2000)
+        const data = {
+            firstName: state.firstName,
+            lastName: state.lastName,
+            phoneNumber: state.phoneNumber,
+            accountStatus: state.accountStatus.toString()
+        }
+
+        await UserServices.createUser(data).then((response) => {
+            toast({
+                ...toastProps,
+                title: "Success",
+                description: response,
+                status: "success",
+            });
+            location.reload();
+            setSubmitting(false);
+            onClose();
+        }).catch((error) => {
+            toast({
+                ...toastProps,
+                title: "Success",
+                description: error?.response?.data?.message,
+                status: "success",
+            });
+            setSubmitting(false);
         })
     }
 
@@ -125,7 +144,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
                                     placeholder="type here"
                                     className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                     type="text"
-                                    name="firstname"
+                                    name="firstName"
                                     onChange={handleChange}
                                 />
                             </Box>
@@ -145,7 +164,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
                                     placeholder="type here"
                                     className="border-0 outline-none focus:outline-none h-8 flex-grow"
                                     type="text"
-                                    name="lastname"
+                                    name="lastName"
                                     onChange={handleChange}
                                 />
                             </Box>
