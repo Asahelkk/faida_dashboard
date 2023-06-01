@@ -10,9 +10,11 @@ import Link from "next/link"
 import { useState } from "react";
 import { useUserStore } from "@utils/zustand/Store"
 import { toastProps } from "@utils/toastHelper"
+import { useRouter } from 'next/navigation'
 
 const SideNav = ({ show }) => {
 
+    const router = useRouter();
     const toast = useToast();
     const [current, setCurrent] = useState("dashboard");
 
@@ -24,13 +26,13 @@ const SideNav = ({ show }) => {
 
     const handleLogout = () => {
         removeUser();
+        router.push('/sign_in');
         toast({
             ...toastProps,
             title: "Success",
             description: "Logged out successfully!",
             status: "success",
         });
-      
     }
 
     return (
