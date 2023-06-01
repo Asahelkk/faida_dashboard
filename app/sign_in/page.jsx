@@ -80,7 +80,7 @@ const SignIn = () => {
         toast({
           ...toastProps,
           title: "Error",
-          description: error?.response?.data?.message,
+          description: error,
           status: "error",
         });
         setSubmitting(false);
