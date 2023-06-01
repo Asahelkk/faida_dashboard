@@ -1,29 +1,29 @@
 "use client";
 
-import { useEffect, useRef } from 'react'
-import loader from '@utils/googleMapLoader'
-import { Box } from '@chakra-ui/react';
+// import { useEffect, useRef } from 'react'
+// import loader from '@utils/googleMapLoader'
+// import { Box } from '@chakra-ui/react';
 
 const Settings = () => {
-    const mapRef = useRef(null);
+    // const mapRef = useRef(null);
 
-    useEffect(() => {
-        loader.load()
-            .then(async () => {
-                const { Map } = await google.maps.importLibrary("maps");
+    // useEffect(() => {
+    //     loader.load()
+    //         .then(async () => {
+    //             const { Map } = await google.maps.importLibrary("maps");
 
-                new Map(mapRef.current, {
-                    center: { lat: -1.26942, lng: 36.77717 },
-                    zoom: 16,
-                });
-            })
-            .catch(e => {
-                console.log(e)
-            });
+    //             new Map(mapRef.current, {
+    //                 center: { lat: -1.26942, lng: 36.77717 },
+    //                 zoom: 16,
+    //             });
+    //         })
+    //         .catch(e => {
+    //             console.log(e)
+    //         });
 
-    }, []);
+    // }, []);
 
-    return <Box ref={mapRef} width={"100%"} maxH={"full"} />;
+    // return <Box ref={mapRef} width={"100%"} maxH={"full"} />;
 }
 
 export default Settings
