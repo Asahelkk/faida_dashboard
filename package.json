@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "serve": "npm install && npm run build && npm run start"
+    "lint": "next lint"
   },
   "dependencies": {
     "@chakra-ui/next-js": "^2.1.3",
