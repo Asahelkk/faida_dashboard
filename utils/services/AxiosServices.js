@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const ENDPOINT = "http://165.227.231.124/backend/api";
+export const ENDPOINT = "https://165.227.231.124/backend/api";
 const BASE_URL = ENDPOINT;
 
 const AxiosUtility = axios.create({
