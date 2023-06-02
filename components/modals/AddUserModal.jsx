@@ -108,7 +108,7 @@ const AddUserModal = ({ isOpen, onClose }) => {
             toast({
                 ...toastProps,
                 title: "Error!",
-                description: error,
+                description: error?.response?.data?.message,
                 status: "error",
             });
             setSubmitting(false);

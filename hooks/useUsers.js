@@ -18,7 +18,7 @@ export const useUsers = () => {
                 toast({
                   ...toastProps,
                   title: "Error!",
-                  description: error,
+                  description: error?.response?.data?.message,
                   status: "error",
                 });
               })
